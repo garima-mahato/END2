@@ -81,6 +81,7 @@ If we randomly, initialize weights without knowing the underlying distribution, 
 
 To observe this, we'll take the above example of a neural network with three hidden layers with ReLU activation function in hidden layers and sigmoid for the output layer.
 Using the above neural network on the dataset “make circles” from sklearn.datasets and zero weight initialization, the result obtained as the following :
+
 for 15000 iterations, loss = 0.38278397192120406, accuracy = 86 %
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi4.png)
@@ -91,13 +92,32 @@ So, while using random weights intialization, we use normal distribution.
 
 **iii) He Normal Initialization**
 
+In this, network weights are initialized by drawing samples from truncated normal distribution with:
+```
+mean = 0, and 
+standard deviation = sqrt(2/fan_in), where fan_in = number of input units to weight
+```
+
+It is generally used with ReLU activation function.
+
+To see this, let us use the previous dataset and neural network we took for above initialization and results are :
+
+for 15000 iterations, loss = 0.07357895962677366, accuracy = 96 %
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi5.png)
 
 
 **iv) Xavier/Glorot Initialization**
 
 In this, network weights are initialized by drawing samples from truncated normal distribution with:
-```mean = 0, and 
-standard deviation = sqrt(1/fan_in), where fan_in = number of input units to weight```
+```
+mean = 0, and 
+standard deviation = sqrt(1/fan_in), where fan_in = number of input units to weight
+```
+
+Sometimes, standard deviation of sqrt(1/(fan_in+fan_out)), where fan_in is the number of input units to weight and fan_out is the number of neurons the result is fed to.
+
+It is generally used with tanh activation function.
 
 
 ### 4) What is "loss" in a neural network?
