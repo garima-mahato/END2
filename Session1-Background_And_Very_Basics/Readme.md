@@ -69,15 +69,15 @@ for 15000 iterations, loss = 0.6931471805599453, accuracy = 50 %
 
 In this, random weights are assigned to each neuron connection. It is based on Break Symmetry in which:
 
-> i) If two hidden units have the same inputs and same activation function, then they must have different initial parameters
+> a) If two hidden units have the same inputs and same activation function, then they must have different initial parameters
 
-> ii) It’s desirable to initialize each unit differently to compute a different function
+> b) It’s desirable to initialize each unit differently to compute a different function
 
 If we randomly, initialize weights without knowing the underlying distribution, 2 issues might occur:
 
-> i) If the weights are initialized with too small random values, then the gradient diminishes as it propagates to the deeper layers.
+> a) If the weights are initialized with too small random values, then the gradient diminishes as it propagates to the deeper layers.
 
-> ii) If the weights are initialized with too large values, then the gradient increases(explodes) as it propagates to the deeper layers.
+> b) If the weights are initialized with too large values, then the gradient increases(explodes) as it propagates to the deeper layers.
 
 To observe this, we'll take the above example of a neural network with three hidden layers with ReLU activation function in hidden layers and sigmoid for the output layer.
 Using the above neural network on the dataset “make circles” from sklearn.datasets and zero weight initialization, the result obtained as the following :
