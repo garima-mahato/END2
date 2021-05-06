@@ -8,6 +8,8 @@
 
 1) What is a neural network neuron?
 
+A neural network mimics the neurological system of human body. The basic building block of neural network is a neuron. Each neuron takes some input, performs some computation and generates the output.
+
 2) What is the use of the learning rate?
 
 3) How are weights initialized?
