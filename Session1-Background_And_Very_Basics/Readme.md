@@ -122,4 +122,20 @@ It is generally used with tanh activation function.
 
 ### 4) What is "loss" in a neural network?
 
+A neural network is a function that tries to approximate/mimic a dataset. In order to check whether the function is the best possible approximation, we compare the output of neural network with the expected output in the dataset. This comparison result between the two is called loss. The comparison function used is called the loss function.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/l1.png)
+
+There are various loss functions available:
+
+**i) Mean Squared Error (MSE)**
+
+**ii) Binary Crossentropy (BCE)**
+
+**iii) Categorical Crossentropy (CC)**
+
+**iv) Sparse Categorical Crossentropy (SCC)**
+
 ### 5) What is the "chain rule" in gradient flow?
+
+The chain rule is used to compute derivatives of composite functions. Since our cost function is always a composite function hence we use chain rule to compute the gradient. The name ‘chain’ comes from the fact that the derivatives (intermediate) are linked (chained) together. 
