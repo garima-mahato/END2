@@ -2,6 +2,10 @@
 
 ## Part 1
 
+[Link to code](https://github.com/garima-mahato/END2/blob/main/Session1-Background_And_Very_Basics/END2_Session_1.ipynb)
+
+[Link to Colab file](https://colab.research.google.com/drive/151njFzlSr2gmJwK9yLV8xf_McI1EPMhf#scrollTo=bL64bMTkw2GP)
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/assignment_part1.PNG)
 
 ## Part 2
