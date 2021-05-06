@@ -51,6 +51,36 @@ Proper initial values must be given to the network otherwise it will lead to pro
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi1.gif)
 
+The different techniques are:
+
+**i) Zero/Ones/Constant Initialization**
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi2.png)
+
+In this technique, all weights are initialized with zero/one/constant value. The derivative with respect to loss function becomes same for all of the weights which in turn updates the weights to the same value in each subsequent iteration. Thus, hidden units become symmetric and it behaves like a linear model.
+
+To observe this, we'll take an example of a neural network with three hidden layers with ReLu activation function in hidden layers and sigmoid for the output layer.
+Using the above neural network on the dataset “make circles” from sklearn.datasets and zero weight initialization, the result obtained as the following :
+for 15000 iterations, loss = 0.6931471805599453, accuracy = 50 %
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi3.png)
+
+**ii) Random Initialization**
+
+In this, random weights are assigned to each neuron connection. It is based on Break Symmetry in which:
+
+> If two hidden units have the same inputs and same activation function, then they must have different initial parameters
+
+> It’s desirable to initialize each unit differently to compute a different function
+
+
+
+**iii) Zero Initialization**
+
+**iv) He Normal Initialization**
+
+**v) Xavier Initialization**
+
 #### 4) What is "loss" in a neural network?
 
 #### 5) What is the "chain rule" in gradient flow?
