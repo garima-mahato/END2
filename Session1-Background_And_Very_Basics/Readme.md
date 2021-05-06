@@ -28,12 +28,14 @@ Each input(*x<sub>i</sub>*) to the neuron is assigned a weight(*w<sub>i</sub>*),
 
 > iii) The summation result *z* is passed through an activation function f to give the result y: **y = f(z)**
 
-This y is the output of a neuron. Thus, we get a neuron.
+This y is the output of a neuron. Thus, a neuron can be thought of as a function with weights and biases as parameters.
 
 
 #### 2) What is the use of the learning rate?
 
+Suppose you are walking on a hill and you need to reach the bottom most of the hill. You are unable to see the bottom most point because of very abrupt rise and fall in the hilly region. What would you do? You would look in the direction ahead of you to see whether it will take you upwards or downwards. If it takes you downwards, you will take a small step in that direction so that you do not miss the bottom most point. If it takes you upwards, you would take a larger step so that you quickly overcome that area.
 
+**How much step size** to take is determined by **learning rate**. Let's try to understand with respect to neuron. A neural network is combination of neurons, i.e., functions. In other terms, its a function. In order to find the best function which explains a particular dataset, we need to find the parameters,i.e. weights and biases, for which output is as close as possible to the expected output,i.e. error is minimum. 
 
 #### 3) How are weights initialized?
 
