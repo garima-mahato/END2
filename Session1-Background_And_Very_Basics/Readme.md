@@ -33,9 +33,15 @@ This y is the output of a neuron. Thus, a neuron can be thought of as a function
 
 #### 2) What is the use of the learning rate?
 
-Suppose you are walking on a hill and you need to reach the bottom most of the hill. You are unable to see the bottom most point because of very abrupt rise and fall in the hilly region. What would you do? You would look in the direction ahead of you to see whether it will take you upwards or downwards. If it takes you downwards, you will take a small step in that direction so that you do not miss the bottom most point. If it takes you upwards, you would take a larger step so that you quickly overcome that area.
+Suppose you are walking on a hill and you need to reach the bottom most of the hill. You are unable to see the bottom most point because of very abrupt rise and fall in the hilly region. What would you do? You would look in the directions from where you are standing to see which direction will take you downwards. Then you will move in that direction and you will take a small step in that direction so that you do not miss the bottom most point. If it takes you upwards, you would take a larger step so that you quickly overcome that area.
 
-**How much step size** to take is determined by **learning rate**. Let's try to understand with respect to neuron. A neural network is combination of neurons, i.e., functions. In other terms, its a function. In order to find the best function which explains a particular dataset, we need to find the parameters,i.e. weights and biases, for which output is as close as possible to the expected output,i.e. error is minimum. 
+**How much step size** to take is determined by **learning rate**. Let's try to understand with respect to neuron. A neural network is combination of neurons, i.e., functions. In other terms, its a function. In order to find the best function which explains a particular dataset, we need to find the parameters,i.e. weights and biases, for which output is as close as possible to the expected output,i.e. error is minimum. For each set of parameters i.e. weights and biases, the error/loss would be different. Thus, loss is a function of parameters. When we plot a graph of parameters versus loss, we get the below graph.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/lr2.png)
+
+This seems similar to the hill you were walking. Let's draw parallel from your hilly experience. The bottom most point in the graph is where loss is minimum. The red arrows denote those points. As the learning algorithm is unaware of these minimas, it will try to get a sense of the direction by finding slope of tangent. It will make steps down the loss function in the direction with the steepest descent. The size of each step is determined by the parameter called as the learning rate, α. For example, the distance between each 'star' in the graph above represents a step determined by α. A smaller α would result in a smaller step and a larger α results in a larger step. 
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/lr1.jpg)
 
 #### 3) How are weights initialized?
 
