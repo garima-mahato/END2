@@ -22,7 +22,11 @@ So, there are 3 operations going on inside a single neuron. A lot is going on in
 
 Each input(*x<sub>i</sub>*) to the neuron is assigned a weight(*w<sub>i</sub>*), where subscript *i* denotes the input index. Below computations happen inside the neuron:
 
-> i) multiplication of input and weights: **x<sub>i</sub> x w<sub>i</sub>**
+> i) Multiplication of input and weights to give weighted inputs: **a<sub>i</sub> = x<sub>i</sub> x w<sub>i</sub>** . 
+> ii) Summation of weighted inputs. Sometimes bias (*b*) is also added. **z = a<sub>1</sub> + a<sub>2</sub> + ... + + a<sub>i</sub> + b** 
+> iii) The summation result *z* is passed through an activation function f to give the result y: **y = f(z)**
+
+This y is the output of a neuron.
 
 
 #### 2) What is the use of the learning rate?
