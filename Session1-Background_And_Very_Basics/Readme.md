@@ -6,7 +6,7 @@
 
 ## Part 2
 
-#### 1) What is a neural network neuron?
+### 1) What is a neural network neuron?
 
 A neural network mimics the neurological system of human body. The basic building block of neural network is a neuron. Each neuron takes some input, performs some computation and generates the output. 
 
@@ -31,7 +31,7 @@ Each input(*x<sub>i</sub>*) to the neuron is assigned a weight(*w<sub>i</sub>*),
 This y is the output of a neuron. Thus, a neuron can be thought of as a function with weights and biases as parameters.
 
 
-#### 2) What is the use of the learning rate?
+### 2) What is the use of the learning rate?
 
 Suppose you are walking on a hill and you need to reach the bottom most of the hill. You are unable to see the bottom most point because of very abrupt rise and fall in the hilly region. What would you do? You would look in the directions from where you are standing to see which direction will take you downwards. Then you will move in that direction and you will take a small step in that direction so that you do not miss the bottom most point. If it takes you upwards, you would take a larger step so that you quickly overcome that area.
 
@@ -59,7 +59,7 @@ The different techniques are:
 
 In this technique, all weights are initialized with zero/one/constant value. The derivative with respect to loss function becomes same for all of the weights which in turn updates the weights to the same value in each subsequent iteration. Thus, hidden units become symmetric and it behaves like a linear model.
 
-To observe this, we'll take an example of a neural network with three hidden layers with ReLu activation function in hidden layers and sigmoid for the output layer.
+To observe this, we'll take an example of a neural network with three hidden layers with ReLU activation function in hidden layers and sigmoid for the output layer.
 Using the above neural network on the dataset “make circles” from sklearn.datasets and zero weight initialization, the result obtained as the following :
 for 15000 iterations, loss = 0.6931471805599453, accuracy = 50 %
 
@@ -69,18 +69,37 @@ for 15000 iterations, loss = 0.6931471805599453, accuracy = 50 %
 
 In this, random weights are assigned to each neuron connection. It is based on Break Symmetry in which:
 
-> If two hidden units have the same inputs and same activation function, then they must have different initial parameters
+> i) If two hidden units have the same inputs and same activation function, then they must have different initial parameters
 
-> It’s desirable to initialize each unit differently to compute a different function
+> ii) It’s desirable to initialize each unit differently to compute a different function
+
+If we randomly, initialize weights without knowing the underlying distribution, 2 issues might occur:
+
+> i) If the weights are initialized with too small random values, then the gradient diminishes as it propagates to the deeper layers.
+
+> ii) If the weights are initialized with too large values, then the gradient increases(explodes) as it propagates to the deeper layers.
+
+To observe this, we'll take the above example of a neural network with three hidden layers with ReLU activation function in hidden layers and sigmoid for the output layer.
+Using the above neural network on the dataset “make circles” from sklearn.datasets and zero weight initialization, the result obtained as the following :
+for 15000 iterations, loss = 0.38278397192120406, accuracy = 86 %
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi4.png)
+
+So, while using random weights intialization, we use normal distribution.
+
+**The normal random weight initialization does not work well for very deep network, especially with non-linear activation functions like ReLU. So, Xaxier and He initialization consider into account both size of the network and activation function.**
+
+**iii) He Normal Initialization**
 
 
 
-**iii) Zero Initialization**
+**iv) Xavier/Glorot Initialization**
 
-**iv) He Normal Initialization**
+In this, network weights are initialized by drawing samples from truncated normal distribution with:
+```mean = 0, and 
+standard deviation = sqrt(1/fan_in), where fan_in = number of input units to weight```
 
-**v) Xavier Initialization**
 
-#### 4) What is "loss" in a neural network?
+### 4) What is "loss" in a neural network?
 
-#### 5) What is the "chain rule" in gradient flow?
+### 5) What is the "chain rule" in gradient flow?
