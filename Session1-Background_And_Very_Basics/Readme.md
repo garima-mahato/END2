@@ -43,7 +43,13 @@ This seems similar to the hill you were walking. Let's draw parallel from your h
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/lr1.jpg)
 
+If the learning rate is very big, the loss will keep on increasing. If it is very small, then we will ake forever to reach the minimum loss. Learning rate gives us control as to how much change we want in step.
+
 #### 3) How are weights initialized?
+
+Proper initial values must be given to the network otherwise it will lead to problems like vanishing or exploding gradients. There are different techniques to initialize weights. You can visualize and play with it in [deeplearning.ai: Weight Initialization](https://www.deeplearning.ai/ai-notes/initialization/). 
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/wi1.gif)
 
 #### 4) What is "loss" in a neural network?
 
