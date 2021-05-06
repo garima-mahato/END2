@@ -10,7 +10,16 @@
 
 A neural network mimics the neurological system of human body. The basic building block of neural network is a neuron. Each neuron takes some input, performs some computation and generates the output. 
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/neuron3.jpg)
+
+This is how a neuron looks like. Let's dissect it and see what happens inside.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/neuron4.png)
+
+So, there are 3 operations going on inside a single neuron. A lot is going on inside a tiny circle. Let's unpack it.
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session1-Background_And_Very_Basics/assets/neuron2.PNG)
+
 
 
 
