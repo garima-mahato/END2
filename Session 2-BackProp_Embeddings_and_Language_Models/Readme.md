@@ -80,7 +80,7 @@ w<sub>i</sub><sup>j+1</sup> = w<sub>i</sub><sup>j</sup> - ɳ * ∂Error/∂w<sub
 
 where i is the weight index,
       
-      j is the iteration number
+j is the iteration number
 
 
 For above network, below are the error gradients with respect to weights calculated using chain formula.
@@ -92,3 +92,5 @@ For above network, below are the error gradients with respect to weights calcula
 # Error Graphs for various learning rates
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session%202-BackProp_Embeddings_and_Language_Models/assets/err_lr.PNG)
+
+The error gradients are small. So, as learning rate increases, the network trains faster.
