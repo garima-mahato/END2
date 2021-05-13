@@ -72,7 +72,7 @@ Thus, it becomes
 ii) Weight is updated using:
 
 ```
-w<sup>i+1</sup>
+w^i+1
 ```
 
 # Error Graphs for various learning rates
