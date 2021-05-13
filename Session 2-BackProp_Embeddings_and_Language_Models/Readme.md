@@ -93,4 +93,4 @@ For above network, below are the error gradients with respect to weights calcula
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session%202-BackProp_Embeddings_and_Language_Models/assets/err_lr.PNG)
 
-The error gradients are small. So, as learning rate increases, the network trains faster.
+
