@@ -36,7 +36,7 @@ a_o1 = σ(o1) = 1/(1+exp(-o1))
 
 a_o2 = σ(o2) = 1/(1+exp(-o2))	
 ```
-9∂E_total/∂w5 
+
 Using the generated output and target, L2 error is calculated as shown below:
 
 ```
@@ -51,7 +51,7 @@ E_total = E1 + E2
 
 Each of the weight in the network is upddated as follows:
 
-i) negative error gradient with respect to the specific weight(∂Error/∂w<sub>i</sub>) is calculated. This indicates the direction in which the error can be minimized by updatig the specific weight.
+i) Error gradient with respect to the specific weight(∂Error/∂w<sub>i</sub>) is calculated. Negative error indicates the direction in which the error can be minimized by updatig the specific weight.
 
 Example:- For w5
 ```
@@ -69,6 +69,11 @@ Thus, it becomes
 ∂E_total/∂w5 = (a_o1-t1) * a_o1*(1-a_o1) * a_h1					
 ```
 
+ii) Weight is updated using:
+
+```
+w<sup>i+1</sup>
+```
 
 # Error Graphs for various learning rates
 
