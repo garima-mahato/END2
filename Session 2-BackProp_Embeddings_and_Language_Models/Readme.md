@@ -72,7 +72,7 @@ Thus, it becomes
 ii) Weight is updated using:
 
 
-w<sup>i+1</sup>
+w<sub>i</sub><sup>j+1</sup> = w<sub>i</sub><sup>j</sup> - ɳ * ∂Error/∂w<sub>i</sub><sup>j</sup>
 
 # Error Graphs for various learning rates
 
