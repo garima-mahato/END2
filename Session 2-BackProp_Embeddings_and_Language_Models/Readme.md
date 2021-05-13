@@ -71,9 +71,8 @@ Thus, it becomes
 
 ii) Weight is updated using:
 
-```
-w^i+1
-```
+
+w<sup>i+1</sup>
 
 # Error Graphs for various learning rates
 
