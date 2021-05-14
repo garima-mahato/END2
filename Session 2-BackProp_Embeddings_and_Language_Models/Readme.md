@@ -1,7 +1,9 @@
 # Neural Network Training in Excel
 ---
 
-[Link to training excel sheet](https://github.com/garima-mahato/END2/blob/main/Session%202-BackProp_Embeddings_and_Language_Models/END2_S2_Backpropagation.xlsx)
+[GitHub Link to Neural Network Training excel sheet](https://github.com/garima-mahato/END2/blob/main/Session%202-BackProp_Embeddings_and_Language_Models/END2_S2_Backpropagation.xlsx)
+
+[Google excel link to Neural Network Training](https://docs.google.com/spreadsheets/d/1ahzv_qVae4vIwlbaJNCeRTGbtVtDbj4M_Og42BSuVQ4/edit?usp=sharing)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session%202-BackProp_Embeddings_and_Language_Models/assets/training.PNG)
 
