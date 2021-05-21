@@ -1,5 +1,8 @@
 # Identifying MNIST image and generating sum
 
+[Link to Colab file](https://github.com/garima-mahato/END2/blob/main/Session3-PyTorch/END2_Session3_PytorchAssignment.ipynb)
+
+
 ## Dataset
 
 #### Data Representation
