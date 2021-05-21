@@ -2,11 +2,11 @@
 
 ## Dataset
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/train_data.png)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/train_data.PNG)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/test_data.png)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/test_data.PNG)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/eval_data.png)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/eval_data.PNG)
 
 ## Model
 
