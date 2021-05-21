@@ -2,11 +2,17 @@
 
 ## Dataset
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/train_data.png)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/test_data.png)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/eval_data.png)
+
 ## Model
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/onnx_identity_adder_model.onnx.png)
 
-**IdentityAddeModel** - a neural network that can:
+**IdentityAdderModel** - a neural network that can:
 I) take 2 inputs:
 
   1) an image from MNIST dataset, and
@@ -18,7 +24,7 @@ II) and gives two outputs:
   1) the "number" that was represented by the MNIST image, and
   2) the "sum" of this number with the random number that was generated and sent as the input to the network
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/model_summary.png
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/model_summary.png)
 
 ## Experimentation
 
