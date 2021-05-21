@@ -65,8 +65,6 @@ Evaluation Dataset size: 10000
 
 ## Model
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/onnx_identity_adder_model.onnx.png)
-
 **IdentityAdderModel** - a neural network that can:
 I) take 2 inputs:
 
@@ -80,10 +78,34 @@ II) and gives two outputs:
   2) the "sum" of this number with the random number that was generated and sent as the input to the network
 
 
+#### Model Structure:
+
+The model consist of 3 parts:
+
+**a) CNN network to identify number from MNIST image:** It consist of 2 convolution blocks. Each convolution block consist of 2 convolution sequentials and Maxpooling layer. Each convolution sequential consist of convolution layer followed by ReLU, batch normalization and dropout layers. After the 2 convolution blocks, another convolution lock is used. By now, a good enough receptive field of 32x32 is reached. So, then a global average pooling is applied. The result of average pooling is combined with fully connected layers to get an embedding of the number identified which has size 20.
+
+**b) Fully connected network to learn both number and addition of numbers:** The 20 size embedding from above CNN and one hot encoding of random number input with size 10 are concatenated and then passed through 2 fully connected layers.
+
+**c) Output layers:** There are 2 output layers. Each of them is a fully connected layer with 10 neurons for number prediction but 19(as max sum result=18) neurons for sum prediction.
+
+
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/onnx_identity_adder_model.onnx.png)
+
+#### Summary of model used:
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/model_summary.png)
 
+## Loss Function used is:
+
+```
+loss = nn.CrossEntropyLoss(out1, num) + nn.CrossEntropyLoss(out2, sum)
+```
+
 ## Training and Testing of model
+
+**Maximum Training Accuracy: 97.84 %**
+**Test Accuracy: 98.84 %**
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/lr_training_log.PNG)
 
@@ -100,7 +122,7 @@ II) and gives two outputs:
 
 ## Model Evaluation
 
-Model is evaluated on evaluation dataset.
+Model is evaluated on evaluation dataset. Accuracy is in percentage.
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/lr_model_eval.PNG)
 
