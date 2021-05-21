@@ -127,7 +127,13 @@ Since predicting both MNIST number and sum are classification problems with 10 a
 
 ## Model Evaluation
 
-Model is evaluated on evaluation dataset. Accuracy is in percentage.
+Model is evaluated on evaluation dataset. For evaluation, below loss function was used:
+
+```
+loss = nn.CrossEntropyLoss(out1, num) + nn.CrossEntropyLoss(out2, sum)
+```
+
+Average Loss and Accuracy Percentage metrics are used for each output - number and sum, along with overall loss and accuracy. Accuracy is in percentage.
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/lr_model_eval.PNG)
 
