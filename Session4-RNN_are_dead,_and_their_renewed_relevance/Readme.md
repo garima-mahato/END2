@@ -12,6 +12,7 @@
 ## Solution:
 
 1) Solution for LSTM Rewrite of RNN:
+
 | Google Colab | [Google Colab Link](https://colab.research.google.com/drive/10UkWvdJ3IMPeMwDLz5ADy-_FDJb7W8Ej?usp=sharing) |
 |---|---|
 | GitHub | [GitHub Link](https://github.com/garima-mahato/END2/blob/main/Session4-RNN_are_dead%2C_and_their_renewed_relevance/END2_Session4_AssignmentSolution1.ipynb) |
