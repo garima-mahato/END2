@@ -102,6 +102,11 @@ The model consist of 3 parts:
 loss = nn.CrossEntropyLoss(out1, num) + nn.CrossEntropyLoss(out2, sum)
 ```
 
+Since predicting both MNIST number and sum are classification problems with 10 and 19 classes respectively.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/loss_fn.jpeg)
+
+
 ## Training and Testing of model
 
 **Maximum Training Accuracy: 97.84 %**
@@ -122,7 +127,13 @@ loss = nn.CrossEntropyLoss(out1, num) + nn.CrossEntropyLoss(out2, sum)
 
 ## Model Evaluation
 
-Model is evaluated on evaluation dataset. Accuracy is in percentage.
+Model is evaluated on evaluation dataset. For evaluation, below loss function was used:
+
+```
+loss = nn.CrossEntropyLoss(out1, num) + nn.CrossEntropyLoss(out2, sum)
+```
+
+Average Loss and Accuracy Percentage metrics are used for each output - number and sum, along with overall loss and accuracy. Accuracy is in percentage.
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session3-PyTorch/assets/lr_model_eval.PNG)
 
