@@ -16,6 +16,7 @@
 | Google Colab | GitHub |
 |---|---|
 | [END2_Session4_AssignmentSolution1.ipynb](https://colab.research.google.com/drive/10UkWvdJ3IMPeMwDLz5ADy-_FDJb7W8Ej?usp=sharing) | [END2_Session4_AssignmentSolution1.ipynb](https://github.com/garima-mahato/END2/blob/main/Session4-RNN_are_dead%2C_and_their_renewed_relevance/END2_Session4_AssignmentSolution1.ipynb) |
+| [Improved: END2_Session4_AssignmentSolution1_Improvements.ipynb](https://githubtocolab.com/garima-mahato/END2/blob/main/Session4-RNN_are_dead,_and_their_renewed_relevance/END2_Session4_AssignmentSolution1_Improvements.ipynb) | [Improved: END2_Session4_AssignmentSolution1_Improvements.ipynb](https://github.com/garima-mahato/END2/blob/main/Session4-RNN_are_dead,_and_their_renewed_relevance/END2_Session4_AssignmentSolution1_Improvements.ipynb) |
 
 ### **2) Solution for LSTM Questions:**
 
