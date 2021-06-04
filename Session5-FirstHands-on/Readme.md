@@ -9,13 +9,229 @@
 
 4) Train your model and achieve 60%+ validation/text accuracy. Upload your collab file on GitHub with readme that contains details about your assignment/word (minimum 250 words), training logs showing final validation accuracy, and outcomes for 10 example inputs from the test/validation data.
 
-## Dataset
+## 1) Dataset
 
-## EDA - Original Dataset
+**Text**
 
-## Data Augmentation
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/sst_sent_tree.PNG)
 
-## EDA - Augmented Dataset
+**Label**
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/sentiments.jpg)
+
+Sentiment:
+
+| Label | Meaning |
+|---|---|
+| 1 | Very Negative |
+| 2 | Negative |
+| 3 | Neutral |
+| 4 | Positive |
+| 5 | Very Positive |
+
+### Original Data
+
+```
+Sample training data:
+  label                                               text
+0     4  The Rock is destined to be the 21st Century 's...
+1     5  The gorgeously elaborate continuation of `` Th...
+2     4  Singer/composer Bryan Adams contributes a slew...
+3     3  You 'd think by now America would have had eno...
+4     4               Yet the act is still charming here .
+ Data Size: 8544
+
+
+Sample test data:
+  label                                               text
+0     3                     Effective but too-tepid biopic
+1     4  If you sometimes like to go to the movies to h...
+2     5  Emerges as something rare , an issue movie tha...
+3     3  The film provides some great insight into the ...
+4     5  Offers that rare combination of entertainment ...
+ Data Size: 2210
+
+
+Sample evaluation data:
+  label                                               text
+0     4  It 's a lovely film with lovely performances b...
+1     3  No one goes unindicted here , which is probabl...
+2     4  And if you 're not nearly moved to tears by a ...
+3     5                   A warm , funny , engaging film .
+4     5  Uses sharp humor and insight into human nature...
+ Data Size: 1101
+```
+
+### Data Augmentation
+
+```
+Sample training data:
+   label                                               text
+0      4  The Rock is destined to be the 21st Century 's...
+1      5  The gorgeously elaborate continuation of `` Th...
+2      4  Singer/composer Bryan Adams contributes a slew...
+3      3  You 'd think by now America would have had eno...
+4      4               Yet the act is still charming here .
+ Data Size: 27085
+
+
+Sample test data:
+  label                                               text
+0     4  It 's a lovely film with lovely performances b...
+1     3  No one goes unindicted here , which is probabl...
+2     4  And if you 're not nearly moved to tears by a ...
+3     5                   A warm , funny , engaging film .
+4     5  Uses sharp humor and insight into human nature...
+ Data Size: 1101
+```
+
+**Code to augment data:**
+```
+import re
+class NLPDataAugmentor():
+  def __init__(self, data, label, text, ratio=0.5):
+    self.data = data
+    self.label = label
+    self.text = text
+    self.ratio = int(ratio*len(self.data))
+  
+  #cleaning up text
+  import re
+  def get_only_chars(self,line):
+
+      clean_line = ""
+
+      line = line.replace("’", "")
+      line = line.replace("'", "")
+      line = line.replace("-", " ") #replace hyphens with spaces
+      line = line.replace("\t", " ")
+      line = line.replace("\n", " ")
+      line = line.lower()
+
+      for char in line:
+          if char in 'qwertyuiopasdfghjklzxcvbnm ':
+              clean_line += char
+          else:
+              clean_line += ' '
+
+      clean_line = re.sub(' +',' ',clean_line) #delete extra spaces
+      if clean_line[0] == ' ':
+          clean_line = clean_line[1:]
+      return clean_line
+
+  def remove_stopwords(self,sentence):
+    tokenized = sentence #custom_tokenize(sentence) #data['text'].apply(custom_tokenize) # Tokenize tweets
+    lower_tokens = [t.lower() for t in tokenized] #tokenized.apply(lambda x: [t.lower() for t in x]) # Convert tokens into lower case
+    alpha_only = [t for t in lower_tokens if t.isalpha()] #lower_tokens.apply(lambda x: [t for t in x if t.isalpha()]) # Remove punctuations
+    no_stops = [t for t in alpha_only if t not in stopwords.words('english')] #alpha_only.apply(lambda x: [t for t in x if t not in stopwords.words('english')]) # remove stop words
+
+    return no_stops
+
+  def get_synonyms(self,word):
+      import nltk
+      from nltk.corpus import wordnet
+      synonyms = []
+        
+      for syn in wordnet.synsets(word):
+          for l in syn.lemmas():
+              synonyms.append(l.name())
+              # if l.antonyms():
+              #     antonyms.append(l.antonyms()[0].name())
+      synonyms = list(set(synonyms))
+      if len(synonyms) > 0:
+        new_synonym = random.choice(synonyms)
+      else:
+        new_synonym = word
+
+      return new_synonym
+
+  def random_insertion(self, sentence, n=5): 
+      from random import randrange
+      words = self.remove_stopwords(sentence) 
+      if len(words)<=0:
+        words = sentence
+      for _ in range(n):
+          word = random.choice(words)
+          new_synonym = self.get_synonyms(word)
+          sentence.insert(randrange(len(sentence)+1), new_synonym)
+      return sentence
+  
+  # random deletion
+  def random_deletion(self, words, p=0.5): 
+    if len(words) == 1: # return if single word
+        return words
+    remaining = list(filter(lambda x: random.uniform(0,1) > p,words)) 
+    if len(remaining) == 0: # if not left, sample a random word
+        return [random.choice(words)] 
+    else:
+        return remaining
+  
+  # random swap
+  def random_swap(self, sentence, n=5): 
+    length = range(len(sentence)) 
+    for _ in range(n):
+        idx1, idx2 = random.sample(length, 2)
+        sentence[idx1], sentence[idx2] = sentence[idx2], sentence[idx1] 
+    return sentence
+  
+  import random
+  import google_trans_new
+  from google_trans_new import google_translator  
+
+  def back_translation(self, sentence):
+      translator = google_translator()
+
+      available_langs = list(google_trans_new.LANGUAGES.keys()) 
+      trans_lang = random.choice(available_langs) 
+
+      translations = translator.translate(sentence, lang_tgt=trans_lang) 
+
+      translations_en_random = translator.translate(translations, lang_src=trans_lang, lang_tgt='en') 
+
+      return translations_en_random
+  
+  def clean_up(self, sentence):
+    sentence = self.get_only_chars(sentence)
+    words = sentence.split(' ')
+    words = [word for word in words if word is not '']
+
+    return words
+
+  def execute(self):
+    s1 = self.data.sample(self.ratio,random_state=4).reset_index(drop=True)
+    s1[self.text] = s1[self.text].apply(self.clean_up).apply(self.random_insertion).map(lambda x: ' '.join(x))
+    print('random insertion done')
+
+    s2 = self.data.sample(self.ratio,random_state=1).reset_index(drop=True)
+    s2[self.text] = s2[self.text].apply(self.clean_up).apply(self.random_deletion).map(lambda x: ' '.join(x))
+    print('random deletion done')
+
+    s3 = self.data[self.data[self.text].apply(self.clean_up).apply(len)>=3].sample(self.ratio,random_state=6).reset_index(drop=True)
+    s3[self.text] = s3[self.text].apply(self.clean_up).apply(self.random_swap).map(lambda x: ' '.join(x))
+    print('random swap done')
+
+    s4 = self.data.sample(n=200,random_state=3).reset_index(drop=True)
+    s4[self.text] = s4[self.text].apply(self.back_translation)
+    print('back translation done')
+
+    new_data = pd.concat([self.data,s1,s2,s3,s4])
+    new_data.reset_index(inplace=True, drop=True)
+
+    return new_data
+```
+
+
+## 2) EDA
+
+### EDA - Original Dataset
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_sent_dist.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_avg_sent_len_comp.png)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_word_freq_comp.png)
+
+### EDA - Augmented Dataset
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug1.PNG)
 
@@ -33,23 +249,14 @@
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug8.PNG)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug9.PNG)
+**Word Cloud for each of the 5 sentiments in Training Data**
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug10.PNG)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug_word_ccloud_train.png)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug11.PNG)
+**Word Cloud for each of the 5 sentiments in Test Data**
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug12.PNG)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug_word_ccloud_test.png)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug13.PNG)
-
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug14.PNG)
-
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug15.PNG)
-
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug16.PNG)
-
-| ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug17.PNG) | ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug18.PNG) |
 
 ## Model Building
 
