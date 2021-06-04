@@ -101,3 +101,51 @@
    Predicted Sentiment: Positive
 
 ```
+
+
+#### 10 Incorrectly Classified Texts
+
+```
+****************************************
+***** Incorrectly Classified Text: *****
+****************************************
+1) Text: It 's a lovely film with lovely performances by Buy and Accorsi .
+   Target Sentiment: Positive
+   Predicted Sentiment: Negative
+
+2) Text: And if you 're not nearly moved to tears by a couple of scenes , you 've got ice water in your veins .
+   Target Sentiment: Positive
+   Predicted Sentiment: Negative
+
+3) Text: A warm , funny , engaging film .
+   Target Sentiment: Very Positive
+   Predicted Sentiment: Positive
+
+4) Text: Uses sharp humor and insight into human nature to examine class conflict , adolescent yearning , the roots of friendship and sexual identity .
+   Target Sentiment: Very Positive
+   Predicted Sentiment: Negative
+
+5) Text: Half Submarine flick , Half Ghost Story , All in one criminally neglected film
+   Target Sentiment: Neutral
+   Predicted Sentiment: Very Positive
+
+6) Text: Entertains by providing good , lively company .
+   Target Sentiment: Positive
+   Predicted Sentiment: Negative
+
+7) Text: Dazzles with its fully-written characters , its determined stylishness ( which always relates to characters and story ) and Johnny Dankworth 's best soundtrack in years .
+   Target Sentiment: Very Positive
+   Predicted Sentiment: Negative
+
+8) Text: Visually imaginative , thematically instructive and thoroughly delightful , it takes us on a roller-coaster ride from innocence to experience without even a hint of that typical kiddie-flick sentimentality .
+   Target Sentiment: Very Positive
+   Predicted Sentiment: Positive
+
+9) Text: Nothing 's at stake , just a twisty double-cross you can smell a mile away -- still , the derivative Nine Queens is lots of fun .
+   Target Sentiment: Positive
+   Predicted Sentiment: Negative
+
+10) Text: Unlike the speedy wham-bam effect of most Hollywood offerings , character development -- and more importantly , character empathy -- is at the heart of Italian for Beginners .
+   Target Sentiment: Very Positive
+   Predicted Sentiment: Negative
+```
