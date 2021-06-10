@@ -257,14 +257,119 @@ class NLPDataAugmentor():
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/eda_aug_word_ccloud_test.png)
 
+From the above clouds, we can see that the most common appearing words like **film** and **movie** appear in all sentiments and so can be considered stopword for the dataset.
 
-## Model Building
+## 3) Model Building
 
-## Training
+**Model Code:**
 
-## Testing
+```
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
+from torch.nn.utils.rnn import pack_padded_sequence, pad_packed_sequence
 
-## Prediction
+class classifier(nn.Module):
+    
+    # Define all the layers used in model
+    def __init__(self, vocab_size, embedding_dim, hidden_dim1, hidden_dim2, output_dim, n_layers,
+                 bidirectional, dropout, pad_index):
+        # Constructor
+        super().__init__()
+
+        # embedding layer
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx = pad_index)
+
+        # lstm layer
+        self.lstm = nn.LSTM(embedding_dim,
+                            hidden_dim1,
+                            num_layers=n_layers,
+                            bidirectional=bidirectional,
+                            batch_first=True)
+        self.fc1 = nn.Linear(hidden_dim1 * 2, hidden_dim2)
+        self.fc2 = nn.Linear(hidden_dim2, output_dim)
+        self.relu = nn.ReLU()
+        self.dropout = nn.Dropout(dropout)
+
+    def forward(self, text, text_lengths):
+        embedded = self.embedding(text)
+
+        # packed sequence
+        packed_embedded = pack_padded_sequence(embedded, text_lengths.to('cpu'), batch_first=True) # unpad
+
+        packed_output, (hidden, cell) = self.lstm(packed_embedded)
+
+        # concat the final forward and backward hidden state
+        cat = torch.cat((hidden[-2, :, :], hidden[-1, :, :]), dim=1)
+
+        rel = self.relu(cat)
+        dense1 = self.fc1(rel)
+
+        drop = self.dropout(dense1)
+        preds = self.fc2(drop)
+        
+        return preds
+```
+
+## 4) Training and Testing
+
+**Training Logs:**
+
+```
+Epoch: 01 | Epoch Time: 0m 5s
+	Train Loss: 1.375 | Train Acc: 38.88%
+	 Val. Loss: 1.308 |  Val. Acc: 40.18% 
+
+Epoch: 02 | Epoch Time: 0m 5s
+	Train Loss: 1.094 | Train Acc: 52.54%
+	 Val. Loss: 1.386 |  Val. Acc: 40.34% 
+
+Epoch: 03 | Epoch Time: 0m 5s
+	Train Loss: 0.819 | Train Acc: 66.72%
+	 Val. Loss: 1.605 |  Val. Acc: 38.51% 
+
+Epoch: 04 | Epoch Time: 0m 5s
+	Train Loss: 0.568 | Train Acc: 78.20%
+	 Val. Loss: 1.957 |  Val. Acc: 39.29% 
+
+Epoch: 05 | Epoch Time: 0m 5s
+	Train Loss: 0.368 | Train Acc: 86.26%
+	 Val. Loss: 2.394 |  Val. Acc: 40.07% 
+
+Epoch: 06 | Epoch Time: 0m 5s
+	Train Loss: 0.245 | Train Acc: 90.98%
+	 Val. Loss: 2.866 |  Val. Acc: 38.60% 
+
+Epoch: 07 | Epoch Time: 0m 5s
+	Train Loss: 0.166 | Train Acc: 93.80%
+	 Val. Loss: 3.697 |  Val. Acc: 38.94% 
+
+Epoch: 08 | Epoch Time: 0m 5s
+	Train Loss: 0.117 | Train Acc: 95.75%
+	 Val. Loss: 4.880 |  Val. Acc: 37.29% 
+
+Epoch: 09 | Epoch Time: 0m 5s
+	Train Loss: 0.093 | Train Acc: 96.80%
+	 Val. Loss: 5.191 |  Val. Acc: 38.06% 
+
+Epoch: 10 | Epoch Time: 0m 5s
+	Train Loss: 0.062 | Train Acc: 97.81%
+	 Val. Loss: 5.869 |  Val. Acc: 37.47% 
+```
+
+#### Training aand Testing Visualization
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/train_test_graph.PNG)
+
+#### Train vs Test Accuracy
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/train_test_acc.PNG)
+
+#### Train vs Test Loss
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/train_test_loss.PNG)
+
+## 5) Prediction
 
 #### 10 Correctly Classified Texts
 
@@ -390,3 +495,14 @@ class NLPDataAugmentor():
    Target Sentiment: Very Positive
    Predicted Sentiment: Negative
 ```
+
+
+## 6) Evaluation
+
+**Accuracy on Testing data: 37.47 %**
+
+
+#### Confusion Matrix on testing data
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session5-FirstHands-on/assets/test_conf_matrix.PNG)
+
