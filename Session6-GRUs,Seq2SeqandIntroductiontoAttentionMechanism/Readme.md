@@ -49,6 +49,121 @@ and send this final vector to a Linear Layer and make the final prediction.
 
 ### Model Building
 
+#### Encoder
+
+```
+class EncoderLSTM(nn.Module):
+  def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim, n_layers=1):
+    super().__init__()
+    self.hidden_dim = hidden_dim
+    self.n_layers = n_layers
+    # embedding layer
+    self.embedding = nn.Embedding(vocab_size, embedding_dim) #, padding_idx=pad_index)
+
+    # lstm layer
+    self.lstm = nn.LSTM(embedding_dim, 
+                        hidden_dim,
+                        num_layers=n_layers,
+                        batch_first=True)
+    
+    self.enc_context = nn.Linear(hidden_dim, output_dim)
+
+  def forward(self, text, visualize=False): #, text_lengths):
+    embedded = self.embedding(text)
+    
+    lstm_output, (hidden, cell) = self.lstm(embedded)
+    
+    output = self.enc_context(hidden.squeeze(0))
+    
+    if visualize:
+      enc_op = lstm_output[0].detach().cpu().numpy()
+      fig, ax = plt.subplots(figsize=(20,10)) 
+      sns.heatmap(enc_op, fmt=".2f", vmin=-1, vmax=1, annot=True, cmap="YlGnBu", ax=ax)#.set(title=f"Encoded Representation from Encoder")
+      plt.title('Hidden State in each time step of Encoder', fontsize = 20) # title with fontsize 20
+      plt.xlabel('Hidden state', fontsize = 15) # x-axis label with fontsize 15
+      plt.ylabel('Time Step', fontsize = 15) # y-axis label with fontsize 15
+      plt.show()
+
+      enc_op = output.detach().cpu().numpy()
+      fig, ax = plt.subplots(figsize=(20,4)) 
+      sns.heatmap(enc_op, fmt=".2f", vmin=-1, vmax=1, annot=True, cmap="YlGnBu", ax=ax, annot_kws={"size": 20})#.set(title=f"Encoded Representation from Encoder")
+      plt.title('Encoded Representation from Encoder', fontsize = 20) # title with fontsize 20
+      plt.show()
+
+    return output, (hidden, cell)
+```
+
+#### Decoder
+
+```
+class DecoderLSTM(nn.Module):
+  def __init__(self, enc_dim, hidden_dim, output_dim, n_layers=1):
+    super().__init__()
+
+    # lstm layer
+    self.lstm = nn.LSTM(enc_dim, 
+                        hidden_dim,
+                        num_layers=n_layers,
+                        batch_first=True)
+    
+    self.decoded_op = nn.Linear(hidden_dim, output_dim)
+  
+  def forward(self, enc_context, enc_hidden, visualize=False): 
+    packed_output, (hidden, cell) = self.lstm(enc_context.unsqueeze(1), enc_hidden)
+    
+    output = self.decoded_op(hidden).squeeze(0)
+    if visualize:
+      enc_op = packed_output[0].detach().cpu().numpy()
+      fig, ax = plt.subplots(figsize=(50,4)) 
+      sns.heatmap(enc_op, fmt=".2f", vmin=-1, vmax=1, annot=True, cmap="YlGnBu", ax=ax, annot_kws={"size": 20})#.set(title=f"Decoded Representation from Decoder")
+      plt.title('Hidden State in each time step of  Decoder', fontsize = 20) # title with fontsize 20
+      plt.xlabel('Hidden State', fontsize = 15) # x-axis label with fontsize 15
+      plt.ylabel('Time Step', fontsize = 15) # y-axis label with fontsize 15
+      plt.show()
+
+      enc_op = output.detach().cpu().numpy()
+      fig, ax = plt.subplots(figsize=(20,4)) 
+      sns.heatmap(enc_op, fmt=".2f", vmin=-1, vmax=1, annot=True, cmap="YlGnBu", ax=ax, annot_kws={"size": 20})#.set(title=f"Encoded Representation from Encoder")
+      plt.title('Decoded Representation from Encoder', fontsize = 20) # title with fontsize 20
+      plt.show()
+    return output
+```
+
+#### Model
+
+```
+class LSTMEncoderDecoderClassifier(nn.Module):
+    
+    # Define all the layers used in model
+    def __init__(self, vocab_size, embedding_dim, hidden_enc_dim, hidden_dec_dim, context_dim, output_dim, n_classes, n_enc_layers=1, n_dec_layers=1):
+        # Constructor
+        super().__init__()
+
+        # encoder layer
+        self.encoder = EncoderLSTM(vocab_size, embedding_dim, hidden_enc_dim, context_dim, n_enc_layers)
+
+        # decoder layer
+        self.decoder = DecoderLSTM(context_dim, hidden_dec_dim, output_dim, n_dec_layers)
+
+        # output layer
+        self.linear_output = nn.Linear(output_dim, n_classes)
+
+    def forward(self, text, visualize=False): #, text_lengths):
+        # text = [batch size,sent_length]
+        encoded_context, encoded_hidden = self.encoder(text, visualize)#, text_lengths)
+        decoded = self.decoder(encoded_context, encoded_hidden, visualize)
+        prediction = self.linear_output(decoded)
+
+        if visualize:
+          enc_op = prediction.detach().cpu().numpy()
+          fig, ax = plt.subplots(figsize=(20,4)) 
+          sns.heatmap(enc_op, fmt=".2f", vmin=-1, vmax=1, annot=True, cmap="YlGnBu", ax=ax)#.set(title=f"Encoded Representation from Encoder")
+          plt.title('Final Prediction', fontsize = 20) # title with fontsize 20
+          plt.show()
+        
+        return prediction
+```
+
 ### Training and Testing
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/training.PNG)
