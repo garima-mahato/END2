@@ -1,4 +1,4 @@
-# Session 6: Encoder-Decoder
+<!--# Session 6: Encoder-Decoder
 
 ## Assignment
 
@@ -194,3 +194,4 @@ class LSTMEncoderDecoderClassifier(nn.Module):
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/dec2.PNG)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/pred.PNG)
+-->
