@@ -1,4 +1,4 @@
-<!--# Session 6: Encoder-Decoder
+# Session 6: Encoder-Decoder
 
 ## Assignment
 
@@ -31,23 +31,19 @@ and send this final vector to a Linear Layer and make the final prediction.
 
 ### Dataset
 
-	tweets	labels
-0	Obama has called the GOP budget social Darwini...	1
-1	In his teen years, Obama has been known to use...	0
-2	IPA Congratulates President Barack Obama for L...	0
-3	RT @Professor_Why: #WhatsRomneyHiding - his co...	0
-4	RT @wardollarshome: Obama has approved more ta...	1
-...	...	...
-1359	@liberalminds Its trending idiot.. Did you loo...	0
-1360	RT @AstoldByBass: #KimKardashiansNextBoyfriend...	0
-1361	RT @GatorNation41: gas was $1.92 when Obama to...	1
-1362	@xShwag haha i know im just so smart, i mean y...	1
-1363	#OBAMA: DICTATOR IN TRAINING. If he passes t...	0
-1364 rows × 2 columns
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/dataset.PNG)
 
 ### EDA
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/eda1.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/eda2.PNG)
+
 ### Model Building
+
+[Link to Code in GitHub](https://github.com/garima-mahato/END2/blob/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/Session6_LSTM_Encoder_Decoder.ipynb)
+
+[Link to colab code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/Session6_LSTM_Encoder_Decoder.ipynb)
 
 #### Encoder
 
@@ -185,6 +181,25 @@ class LSTMEncoderDecoderClassifier(nn.Module):
 
 ### Evaluation
 
+#### Confusion Matrix
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/conf_matrix.PNG)
+
+#### Evaluation Metrics Result
+
+F1 Macro Score: 0.4941398028137809
+Accuracy: 78.04878048780488 %
+
+#### Model Visualization on sample result
+
+```
+**Sample Sentence**: Obama has called the GOP budget social Darwinism. Nice try, but they believe in social creationism.
+
+**Target Label**: 1
+
+**Predicted Label**: 1
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/enc1.PNG)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/enc2.PNG)
@@ -194,4 +209,4 @@ class LSTMEncoderDecoderClassifier(nn.Module):
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/dec2.PNG)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism/assets/pred.PNG)
--->
+
