@@ -226,8 +226,9 @@ class LSTMEncoderDecoderClassifier(nn.Module):
 
 #### Evaluation Metrics Result
 
-F1 Macro Score: 0.5041695303550974
-Accuracy: 79.02439024390245 %
+**F1 Macro Score: 0.5041695303550974**
+
+**Accuracy: 79.02439024390245 %**
 
 #### Model Visualization on sample result
 
