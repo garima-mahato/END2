@@ -5,9 +5,9 @@ from torchtext.legacy.data import Field, BucketIterator
 import pandas as pd
 import os
 
-from .SeqDataset import SeqDataset
+from .NLPClassificationDataset import NLPClassificationDataset
 
-class SSTDataset(SeqDataset):
+class SSTDataset(NLPClassificationDataset):
     def __init__(self, data_path, seed, batch_size, device, split_ratio=[0.7, 0.3]):
         # super(QuoraDataset, self).__init__(data_path, seed, batch_size, device, split_ratio)
         self.split_ratio = split_ratio
@@ -38,31 +38,4 @@ class SSTDataset(SeqDataset):
 
         return sst_data
     
-    def create_dataset(self):
-        try:
-            SRC = Field(sequential = True, tokenize = 'spacy', batch_first =True, include_lengths=True)
-            TRG = data.LabelField(tokenize ='spacy', is_target=True, batch_first =True, sequential =True)
-            fields = [('src', SRC),('trg', TRG)]
-            example = [data.Example.fromlist([self.seq_data.src[i],self.seq_data.trg[i]], fields) for i in range(self.seq_data.shape[0])] 
-            
-            # Creating dataset
-            Dataset = data.Dataset(example, fields)
-            (self.train_data, self.test_data) = Dataset.split(split_ratio=self.split_ratio, random_state=random.seed(self.seed))
-            
-            print(f"Number of training examples: {len(self.train_data.examples)}")
-            print(f"Number of testing examples: {len(self.test_data.examples)}")
-
-            # build vocabulary
-            SRC.build_vocab(self.train_data,  
-                 vectors = "glove.6B.100d", 
-                 unk_init = torch.Tensor.normal_)
-
-            TRG.build_vocab(self.train_data)
-
-            print(f"Unique tokens in source vocabulary: {len(SRC.vocab)}")
-            print(f"Unique tokens in target vocabulary: {len(TRG.vocab)}")
-
-            return self.train_data, self.test_data, SRC, TRG
-        except Exception as e:
-            raise e
     

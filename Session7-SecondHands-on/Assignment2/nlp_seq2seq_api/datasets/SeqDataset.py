@@ -20,7 +20,7 @@ class SeqDataset():
         self.device = device
         self.batch_size = batch_size
         self.seq_data = self.load_data(self.data_path)
-
+        
     def load_data(self, data_path):
         raise NotImplementedError
     
@@ -57,6 +57,6 @@ class SeqDataset():
             self.train_data, self.test_data, SRC, TRG = self.create_dataset()
             self.train_iterator, self.test_iterator = BucketIterator.splits((self.train_data, self.test_data),batch_size=self.batch_size,sort_key = lambda x: len(x.src),sort_within_batch=True,device = self.device)
         
-            return self.train_iterator, self.test_iterator, SRC, TRG
+            return self.train_iterator, self.test_iterator, SRC, TRG, self.seq_data
         except Exception as e:
             raise e

@@ -16,14 +16,16 @@ import numpy as np
 import random
 import math
 import time
+import os
+import pickle
 
-available_data = ['quora', 'wikipedia qa', 'ambig']
-data_dict = {'quora': QuoraDataset, 'wikipedia qa': WikiDataset, 'ambig': AmbigNqQADataset}
+available_data = ['quora', 'wikipedia qa', 'ambig', 'commonsense']
+data_dict = {'quora': QuoraDataset, 'wikipedia qa': WikiDataset, 'ambig': AmbigNqQADataset, 'commonsense': CommonsenseQADataset}
 
 available_models = ['lstm encoder-decoder sequence model']
 model_dict = {'lstm encoder-decoder sequence model': Seq2Seq}
 
-class NLP_Pipeline():
+class NLPSeq2SeqPipeline():
     def __init__(self, data_path, data_name, model_name, model_params, seed, batch_size, device, clip = 1, split_ratio=[0.7, 0.3]):
         self.split_ratio = split_ratio
         self.data_path = data_path
@@ -37,20 +39,27 @@ class NLP_Pipeline():
         assert self.data_name.lower() in available_data, f"Please select data from: {available_data}"
         assert self.model_name.lower() in available_models, f"Please select model from: {available_models}"
         print('Loading data...')
-        self.train_iterator, self.test_iterator, SRC, TRG = data_dict[self.data_name](self.data_path, self.seed, self.batch_size, self.device, self.split_ratio).iterate_dataset()
+        self.train_iterator, self.test_iterator, self.SRC, self.TRG, self.orig_data = data_dict[self.data_name](self.data_path, self.seed, self.batch_size, self.device, self.split_ratio).iterate_dataset()
+        print('Sample Data:-')
+        print(self.orig_data.head())
         print('Data is loaded')
+        print('\n')
+
+        print('Loading model...')
         self.model_params = model_params
-        self.model_params['input_dim'] = len(SRC.vocab)
-        self.model_params['output_dim'] = len(TRG.vocab)
+        self.model_params['input_dim'] = len(self.SRC.vocab)
+        self.model_params['output_dim'] = len(self.TRG.vocab)
         self.model_params['device'] = self.device
-        print('Loading model....')
         self.model = model_dict[self.model_name](**self.model_params).to(self.device)
         self.model.apply(self.init_weights)
+        print('Model Loaded...')
+        print('Model Structure:- ')
+        print(self.model)
         print(f'The model has {self.count_parameters():,} trainable parameters')
         self.optimizer = optim.Adam(self.model.parameters())
-        TRG_PAD_IDX = TRG.vocab.stoi[TRG.pad_token]
+        TRG_PAD_IDX = self.TRG.vocab.stoi[self.TRG.pad_token]
         self.criterion = nn.CrossEntropyLoss(ignore_index = TRG_PAD_IDX)
-        print('model built')
+        print('Model Built')
 
     def init_weights(self, m):
         for name, param in m.named_parameters():
@@ -118,4 +127,34 @@ class NLP_Pipeline():
             print('model saved')
         except Exception as e:
             raise e
+    
+    def save_tokenizer_inv(self, base_path, src_tok_name, trg_tok_name=None, stoi=True):
+        try:
+            if stoi:
+                with open(os.path.join(base_path, f'{src_tok_name}.pkl'), 'wb') as tokens: 
+                    pickle.dump(self.SRC.vocab.stoi, tokens)
+
+                if trg_tok_name is not None:
+                    with open(os.path.join(base_path, f'{trg_tok_name}.pkl'), 'wb') as tokens:
+                        pickle.dump(self.TRG.vocab.stoi, tokens)
+            else:
+                with open(os.path.join(base_path, f'{src_tok_name}.pkl'), 'wb') as tokens: 
+                    pickle.dump(self.SRC.vocab.itos, tokens)
+
+                if trg_tok_name is not None:
+                    with open(os.path.join(base_path, f'{trg_tok_name}.pkl'), 'wb') as tokens:
+                        pickle.dump(self.TRG.vocab.itos, tokens)
+            print('tokenizers saved')
+        except Exception as e:
+            raise e
+    
+    def load_tokenizer(self, tok_file_path=None):
+        try:
+            tokenizer_file = open(tok_file_path, 'rb')
+            tokenizer = pickle.load(tokenizer_file)
+
+            return tokenizer
+        except Exception as e:
+            raise e
+    
     
