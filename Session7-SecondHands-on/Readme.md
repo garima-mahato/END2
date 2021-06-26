@@ -51,13 +51,15 @@
 ## Assignment 1
 ---
 
-[Link to GitHub Code]()
+[Link to GitHub Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment1/END2_Session7_Assignment1_SentimentClassification_On_SSTDataset.ipynb)
 
-[Link to Colab Code]()
+[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment1/END2_Session7_Assignment1_SentimentClassification_On_SSTDataset.ipynb)
 
 #### Classification API Structure:
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session7-SecondHands-on/Assignment1/assets/code_folder_structure.PNG)
+
+[Link to Classification API](https://github.com/garima-mahato/END2/tree/main/Session7-SecondHands-on/Assignment1/nlp_classification_api)
 
 ### 1) Dataset
 
