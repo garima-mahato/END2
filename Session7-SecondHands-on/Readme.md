@@ -447,7 +447,7 @@ Epoch: 10 | Epoch Time: 0m 1s
 
 ## Assignment 2
 
-THe datasets are subclasses of:
+The datasets are subclasses of:
 
 ```
 import torch
@@ -572,9 +572,9 @@ All 3 'question_answer_pairs.txt' were read and combined. The result is below.
 3998 rows × 6 columns
 ```
 
-[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)
+<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)-->
 
-[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)
+[Link to Colab Code](https://colab.research.google.com/drive/1DQdgNhJ1OXvtJKOvwL44fDFyQi5kiHBg?usp=sharing)
 
 Code:
 
@@ -620,9 +620,9 @@ class WikiDataset(SeqDataset):
 
 Task: Generate duplicate question given a question
 
-[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)
+<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)-->
 
-[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)
+[Link to Colab Code](https://colab.research.google.com/drive/1nJdOw5nMuQz09YP_OFqLdP8emO_nDJ7E?usp=sharing)
 
 Code:
 
@@ -662,9 +662,9 @@ class QuoraDataset(SeqDataset):
 
 Task: Answer a question
 
-[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)
+<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
 
-[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)
+[Link to Colab Code](https://colab.research.google.com/drive/1jEeQQOcejQNy_JRPs6ZbBzRToT4dBAkq?usp=sharing)
 
 ```
 import torch
@@ -731,9 +731,9 @@ class AmbigNqQADataset(SeqDataset):
 
 Task: Answer a question
 
-[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)
+<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
 
-[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)
+[Link to Colab Code](https://colab.research.google.com/drive/1dsE_vbuoCurWxc6i15gMfjkSRDjOETcd?usp=sharing)
 
 ```
 import torch
