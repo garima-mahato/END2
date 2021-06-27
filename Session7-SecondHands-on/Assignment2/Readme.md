@@ -1,5 +1,5 @@
 
-# Session 7 - Second Hands-On
+# Session 7 - Second Hands-On (Assignment 2)
 ---
 
 ## Assignment
