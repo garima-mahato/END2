@@ -407,7 +407,7 @@ Sample Data:
 10036 rows × 3 columns
 ```
 
-After expaning annotations column:
+After expanding annotations column:
 
 ```
 	type		qaPairs							answer	question
@@ -429,7 +429,7 @@ Procedure to create question-answer pair:
 
 1) The data was divided into 2 portions:
 
-> 1) type = 'singleAnswer' : for this portionquestion column was taken and answer was taken from annotations column
+> 1) type = 'singleAnswer' : for this portion question column was taken and answer was taken from annotations column
 
 ```
 	question						answer
