@@ -1,4 +1,4 @@
-# Rise of Pheonix in the NLP Land
+# NLP Evolution
 
 ## 1) [Background and Basics](https://garima-mahato.github.io/END2/Session1-Background_And_Very_Basics)
 
