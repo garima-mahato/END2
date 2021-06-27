@@ -537,7 +537,71 @@ class AmbigNqQADataset(SeqDataset):
 
 ### 2) Commonsense QA Data
 
-Task: Answer a question
+**Task: Answer Common sense question**
+
+**Description:**
+
+CommonsenseQA is a new multiple-choice question answering dataset that requires different types of commonsense knowledge to predict the correct answers . It contains 12,102 questions with one correct answer and four distractor answers.  The dataset is provided in two major training/validation/testing set splits.
+
+There are 3 JSON files for: train, validate, test.
+
+We will consider train and validate files because test does not contain answers.
+
+Each line in JSON file represents record. Each record consists of: 
+
+1) answerKey:- It denotes the key  or label for correct option.
+
+2) id:- uniques question id
+
+3) question:- It is a dictionary of:
+
+> i) question_concept - denotes the category to which question belong.
+
+> ii) choices - denotes choices among which answer lies. It is a list of dictionary containing:
+
+>> a) label: can be A or B or C or D
+
+>> b) text
+
+> iii) stem
+
+Below is the structure when converted to Data Frame:
+
+```
+    answerKey	id			      question.question_concept	question.choices				question.stem
+0	A	075e483d21c29a511267ef62bedc0461	punishing	[{'label': 'A', 'text': 'ignore'}, {'label': '...	The sanctions against the school were a punish...
+1	B	61fe6e879ff18686d7552425a36344c8	people		[{'label': 'A', 'text': 'race track'}, {'label...	Sammy wanted to go to where the people were. ...
+2	A	4c1cb0e95b99f72d55c068ba0255c54d	choker		[{'label': 'A', 'text': 'jewelry store'}, {'la...	To locate a choker not located in a jewelry bo...
+3	D	02e821a3e53cb320790950aab4489e85	highway		[{'label': 'A', 'text': 'united states'}, {'la...	Google Maps and other highway and street GPS s...
+4	C	23505889b94e880c3e89cff4ba119860	fox		[{'label': 'A', 'text': 'pretty flowers.'}, {'...	The fox walked from the city into the forest, ...
+...	...	...	...	...	...
+9736	E	f1b2a30a1facff543e055231c5f90dd0	going public	[{'label': 'A', 'text': 'consequences'}, {'lab...	What would someone need to do if he or she wan...
+9737	D	a63b4d0c0b34d6e5f5ce7b2c2c08b825	chair		[{'label': 'A', 'text': 'stadium'}, {'label': ...	Where might you find a chair at an office?
+9738	A	22d0eea15e10be56024fd00bb0e4f72f	jeans		[{'label': 'A', 'text': 'shopping mall'}, {'la...	Where would you buy jeans in a place with a la...
+9739	A	7c55160a4630de9690eb328b57a18dc2	well		[{'label': 'A', 'text': 'fairytale'}, {'label'...	John fell down the well. he couldn't believe ...
+9740	C	dd640927f9920930501fb8dc3efc196b	electricity	[{'label': 'A', 'text': 'put in to the water'}...	I forgot to pay the electricity bill, now what...
+9741 rows × 5 columns
+```
+
+To create answer column, answerKey is matched with question.choices.
+
+```
+   answerKey	id				question.question_concept	question.choices				question.stem	answer
+0	A	075e483d21c29a511267ef62bedc0461	punishing	[{'label': 'A', 'text': 'ignore'}, {'label': '...	The sanctions against the school were a punish...	ignore
+1	B	61fe6e879ff18686d7552425a36344c8	people		[{'label': 'A', 'text': 'race track'}, {'label...	Sammy wanted to go to where the people were. ...	populated areas
+2	A	4c1cb0e95b99f72d55c068ba0255c54d	choker		[{'label': 'A', 'text': 'jewelry store'}, {'la...	To locate a choker not located in a jewelry bo...	jewelry store
+3	D	02e821a3e53cb320790950aab4489e85	highway		[{'label': 'A', 'text': 'united states'}, {'la...	Google Maps and other highway and street GPS s...	atlas
+4	C	23505889b94e880c3e89cff4ba119860	fox		[{'label': 'A', 'text': 'pretty flowers.'}, {'...	The fox walked from the city into the forest, ...	natural habitat
+...	...	...	...	...	...	...
+9736	E	f1b2a30a1facff543e055231c5f90dd0	going public	[{'label': 'A', 'text': 'consequences'}, {'lab...	What would someone need to do if he or she wan...	telling all
+9737	D	a63b4d0c0b34d6e5f5ce7b2c2c08b825	chair		[{'label': 'A', 'text': 'stadium'}, {'label': ...	Where might you find a chair at an office?	cubicle
+9738	A	22d0eea15e10be56024fd00bb0e4f72f	jeans		[{'label': 'A', 'text': 'shopping mall'}, {'la...	Where would you buy jeans in a place with a la...	shopping mall
+9739	A	7c55160a4630de9690eb328b57a18dc2	well		[{'label': 'A', 'text': 'fairytale'}, {'label'...	John fell down the well. he couldn't believe ...	fairytale
+9740	C	dd640927f9920930501fb8dc3efc196b	electricity	[{'label': 'A', 'text': 'put in to the water'}...	I forgot to pay the electricity bill, now what...	produce heat
+9741 rows × 6 columns
+```
+
+From above question.stem is selected as question column and answer column are selected.
 
 <!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
 
