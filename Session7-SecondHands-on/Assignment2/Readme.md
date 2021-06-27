@@ -603,7 +603,7 @@ To create answer column, answerKey is matched with question.choices.
 
 From above question.stem is selected as question column and answer column are selected.
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_CommonsenseQA.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1dsE_vbuoCurWxc6i15gMfjkSRDjOETcd?usp=sharing)
 
