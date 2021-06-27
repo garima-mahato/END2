@@ -95,7 +95,30 @@ class SeqDataset():
 
 ### Wikipedia QA Data
 
-Task: Anwer Questions
+**Task: Answer Questions**
+
+**Description:**
+
+There are three directories, one for each year of students: S08, S09, and S10.
+
+The file "question_answer_pairs.txt" contains the questions and answers. The first line of the file contains 
+column names for the tab-separated data fields in the file. This first line follows:
+
+ArticleTitle    Question        Answer  DifficultyFromQuestioner        DifficultyFromAnswerer  ArticleFile
+
+Field 1 is the name of the Wikipedia article from which questions and answers initially came.
+
+Field 2 is the question.
+
+Field 3 is the answer.
+
+Field 4 is the prescribed difficulty rating for the question as given to the question-writer. 
+
+Field 5 is a difficulty rating assigned by the individual who evaluated and answered the question, 
+which may differ from the difficulty in field 4.
+
+Field 6 is the relative path to the prefix of the article files. html files (.htm) and cleaned 
+text (.txt) files are provided.
 
 [Link to data](http://www.cs.cmu.edu/~ark/QA-data/)
 
@@ -151,6 +174,54 @@ All 3 'question_answer_pairs.txt' were read and combined. The result is below.
 3998 rows × 6 columns
 ```
 
+After that, only Question and Answer columns were extracted to form the below data:
+
+```
+
+	Question						Answer
+0	Was Volta an Italian physicist?				yes
+1	Was Volta an Italian physicist?				yes
+2	Is Volta buried in the city of Pittsburgh?		no
+3	Is Volta buried in the city of Pittsburgh?		no
+4	Did Volta have a passion for the study of elec...	yes
+...	...	...
+3993	What areas do the Grevy's Zebras inhabit?		NaN
+3994	Which species of zebra is known as the common ...	Plains Zebra (Equus quagga, formerly Equus bur...
+3995	Which species of zebra is known as the common ...	Plains Zebra
+3996	At what age can a zebra breed?				five or six
+3997	At what age can a zebra breed?				5 or 6
+3998 rows × 2 columns
+```
+
+There are some null values also. So, we need to remove those rows.
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3998 entries, 0 to 3997
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   Question  3961 non-null   object
+ 1   Answer    3422 non-null   object
+dtypes: object(2)
+memory usage: 62.6+ KB
+```
+
+After removing, the final data has 3422 rows:
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3422 entries, 0 to 3421
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   Question  3422 non-null   object
+ 1   Answer    3422 non-null   object
+dtypes: object(2)
+memory usage: 53.6+ KB
+
+```
+
 <!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)-->
 
 [Link to Colab Code](https://colab.research.google.com/drive/1DQdgNhJ1OXvtJKOvwL44fDFyQi5kiHBg?usp=sharing)
@@ -197,7 +268,54 @@ class WikiDataset(SeqDataset):
 
 ### Quora Data
 
-Task: Generate duplicate question given a question
+**Task: Generate Duplicate Question based on a question**
+
+**Description:**
+
+Quora dataset consists of over 400,000 lines of potential question duplicate pairs. Each line contains IDs for each question in the pair, the full text for each question, and a binary value that indicates whether the line truly contains a duplicate pair.
+
+Sample Data:
+
+```
+	id	qid1	qid2	question1						question2						is_duplicate
+0	0	1	2	What is the step by step guide to invest in sh...	What is the step by step guide to invest in sh...	0
+1	1	3	4	What is the story of Kohinoor (Koh-i-Noor) Dia...	What would happen if the Indian government sto...	0
+2	2	5	6	How can I increase the speed of my internet co...	How can Internet speed be increased by hacking...	0
+3	3	7	8	Why am I mentally very lonely? How can I solve...	Find the remainder when [math]23^{24}[/math] i...	0
+4	4	9	10	Which one dissolve in water quikly sugar, salt...	Which fish would survive in salt water?			0
+```
+
+id - unique questions pair id
+
+qid1 - question 1 id
+
+qid2 - question 2 id
+
+question1 - full text of question 1
+
+question2 - full text of question 2
+
+is_duplicate - 0 indicates not a duplicate pair while 1 indicates dulicate questions
+
+We need to consider question1 and question2 columns for our purpose. Among all rows, only those rows have to be considered where is_duplicate=1.
+
+```
+	question1						question2
+0	Astrology: I am a Capricorn Sun Cap moon and c...	I'm a triple Capricorn (Sun, Moon and ascendan...
+1	How can I be a good geologist?				What should I do to be a great geologist?
+2	How do I read and find my YouTube comments?		How can I see all my Youtube comments?
+3	What can make Physics easy to learn?			How can you make physics easy to learn?
+4	What was your first sexual experience like?		What was your first sexual experience?
+...	...	...
+149258	What are some outfit ideas to wear to a frat p...	What are some outfit ideas wear to a frat them...
+149259	Why is Manaphy childish in Pokémon Ranger and ...	Why is Manaphy annoying in Pokemon ranger and ...
+149260	How does a long distance relationship work?		How are long distance relationships maintained?
+149261	What does Jainism say about homosexuality?		What does Jainism say about Gays and Homosexua...
+149262	Do you believe there is life after death?		Is it true that there is life after death?
+```
+
+Since there are no nulls in above data, we'll be using this data
+
 
 <!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)-->
 
