@@ -93,7 +93,7 @@ class SeqDataset():
             raise e
 ```
 
-### Wikipedia QA Data
+### 1) Wikipedia QA Data
 
 **Task: Answer Questions**
 
@@ -222,7 +222,7 @@ memory usage: 53.6+ KB
 
 ```
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)-->
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1DQdgNhJ1OXvtJKOvwL44fDFyQi5kiHBg?usp=sharing)
 
@@ -266,7 +266,7 @@ class WikiDataset(SeqDataset):
     
 ```
 
-### Quora Data
+### 2) Quora Data
 
 **Task: Generate Duplicate Question based on a question**
 
@@ -317,7 +317,7 @@ We need to consider question1 and question2 columns for our purpose. Among all r
 Since there are no nulls in above data, we'll be using this data
 
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)-->
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1nJdOw5nMuQz09YP_OFqLdP8emO_nDJ7E?usp=sharing)
 
@@ -355,9 +355,120 @@ class QuoraDataset(SeqDataset):
 ## Additional Datasets
 ---
 
-### AmbigNQ Light Data
+### 1) AmbigNQ Light Data
 
-Task: Answer a question
+# Sequence to Sequence Prediction on AmbigQA Light Data
+---
+
+**Task: Answer Question**
+
+**Description:**
+
+**AmbigNQ** is a dataset covering 14,042 questions from NQ-open, an existing open-domain QA benchmark. We find that over half of the questions in NQ-open are ambiguous.
+
+We provide two distributions of our new dataset AmbigNQ: a `full` version with all annotation metadata
+and a `light` version with only inputs and outputs.
+
+Here, Iam usig light version.
+
+The light version contains
+- train_light.json (3.3M)
+- dev_light.json (977K)
+
+`{train|dev}_light.json` files contains a list of dictionary that represents a single datapoint, with the following keys:
+
+- `id` (string): an identifier for the question, consistent with the original NQ dataset.
+
+- `question` (string): a question. This is identical to the question in the original NQ except we postprocess the string to start uppercase and end with a question mark.
+
+- `annotations` (a list of dictionaries): a list of all acceptable outputs, where each output is a dictionary that represents either a single answer or multiple question-answer pairs.
+
+    - `type`: `singleAnswer` or `multipleQAs`
+
+    - (If `type` is `singleAnswer`) `answer`: a list of strings that are all acceptable answer texts
+
+    - (If `type` is `multipleQAs`) `qaPairs`: a list of dictionaries with `question` and `answer`. `question` is a string, and `answer` is a list of strings that are all acceptable answer texts
+
+Sample Data:
+
+```
+	annotations						id			question
+0	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-4469503464110108318	When did the simpsons first air on television?
+1	[{'type': 'singleAnswer', 'answer': ['David Mo...	4790842463458965203	Who played george washington in the john adams...
+2	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-6631915997977101143	What is the legal age of marriage in usa?
+3	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-3098213414945179817	Who starred in barefoot in the park on broadway?
+4	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-927805218867163489	When did the manhattan project began and end?
+...	...	...	...
+10031	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	8643122201694054820	When do the summer holidays start for schools?
+10032	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	9033094464364994905	Who is the band in the movie 10 things i hate ...
+10033	[{'type': 'singleAnswer', 'answer': ['Gwynne E...	9101518012234561119	Who was the last person in the uk to be executed?
+10034	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	926954766593964346	Who does wonder woman end up with in the comics?
+10035	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	98262964342640738	When were the first pair of jordans released?
+10036 rows × 3 columns
+```
+
+After expanding annotations column:
+
+```
+	type		qaPairs							answer	question
+0	multipleQAs	[{'question': 'When did the Simpsons first air...	NaN	When did the simpsons first air on television?
+1	singleAnswer	NaN	[David Morse]	Who played george washington in the john adams...
+2	multipleQAs	[{'question': 'What is the legal age of marria...	NaN	What is the legal age of marriage in usa?
+3	multipleQAs	[{'question': 'Who starred in barefoot in the ...	NaN	Who starred in barefoot in the park on broadway?
+4	multipleQAs	[{'question': 'Based on the initial thoughts o...	NaN	When did the manhattan project began and end?
+...	...	...	...	...
+10246	multipleQAs	[{'question': 'Who is the band at Club Skunk i...	NaN	Who is the band in the movie 10 things i hate ...
+10247	multipleQAs	[{'question': 'Who is the band that performs a...	NaN	Who is the band in the movie 10 things i hate ...
+10248	singleAnswer	NaN	[Gwynne Evans and Peter Allen]	Who was the last person in the uk to be executed?
+10249	multipleQAs	[{'question': 'Who does wonder woman end up wi...	NaN	Who does wonder woman end up with in the comics?
+10250	multipleQAs	[{'question': 'When were the first pair of Air...	NaN	When were the first pair of jordans released?
+10251 rows × 4 columns
+```
+
+Procedure to create question-answer pair:
+
+1) The data was divided into 2 portions:
+
+> 1) type = 'singleAnswer' : for this portion question column was taken and answer was taken from annotations column
+
+```
+	question						answer
+0	Who played george washington in the john adams...	David Morse
+1	When did the frozen ride open at epcot?			June 21, 2016
+2	Name the landforms that form the boundaries of...	Aravali Range, Satpura Range, Vindhyan Range
+3	When was the first airplane used in war?	Blériot XI
+4	When was the first airplane used in war?	Nieuport IV
+...	...	...
+8346	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8347	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8348	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8349	Who wrote make you feel my love song?	Bob Dylan
+8350	Who was the last person in the uk to be executed?	Gwynne Evans and Peter Allen
+8351 rows × 2 columns
+```
+
+
+> 2) type = 'multipleQAs' : for this portion, qaPairs is converted into question and answer columns expanding over rows.
+
+```
+	question						answer
+0	When did the Simpsons first air on television ...	April 19, 1987
+1	When did the Simpsons first air as a half-hour...	December 17, 1989
+2	What is the legal age of marriage, without par...	18 years of age
+3	What is the legal age of marriage, without par...	18
+4	What is the legal age of marriage, without par...	19
+...	...	...
+19466	Who does wonder woman end up with in All Star ...	General Steven Rockwell Trevor
+19467	Who does wonder woman end up with in All Star ...	Steve Trevor
+19468	Who does wonder woman end up with in the new 52?	Superman and Batman
+19469	When were the first pair of Air Jordans releas...	early 1984
+19470	When were the first pair of Air Jordans releas...	November 17, 1984
+19471 rows × 2 columns
+```
+
+2) Then, both these portion are combined vertically.
+
+3) Steps 1-2 are repeated for both train and test data.
 
 <!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
 
@@ -424,7 +535,7 @@ class AmbigNqQADataset(SeqDataset):
     
 ```
 
-### Commonsense QA Data
+### 2) Commonsense QA Data
 
 Task: Answer a question
 
