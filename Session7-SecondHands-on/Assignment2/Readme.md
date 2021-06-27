@@ -93,7 +93,7 @@ class SeqDataset():
             raise e
 ```
 
-### Wikipedia QA Data
+### 1) Wikipedia QA Data
 
 **Task: Answer Questions**
 
@@ -266,7 +266,7 @@ class WikiDataset(SeqDataset):
     
 ```
 
-### Quora Data
+### 2) Quora Data
 
 **Task: Generate Duplicate Question based on a question**
 
@@ -355,7 +355,7 @@ class QuoraDataset(SeqDataset):
 ## Additional Datasets
 ---
 
-### AmbigNQ Light Data
+### 1) AmbigNQ Light Data
 
 # Sequence to Sequence Prediction on AmbigQA Light Data
 ---
@@ -535,7 +535,7 @@ class AmbigNqQADataset(SeqDataset):
     
 ```
 
-### Commonsense QA Data
+### 2) Commonsense QA Data
 
 Task: Answer a question
 
