@@ -514,9 +514,32 @@ class SeqDataset():
             raise e
 ```
 
-### Wikipedia QA Data
+### 1) Wikipedia QA Data
 
-Task: Anwer Questions
+**Task: Answer Questions**
+
+**Description:**
+
+There are three directories, one for each year of students: S08, S09, and S10.
+
+The file "question_answer_pairs.txt" contains the questions and answers. The first line of the file contains 
+column names for the tab-separated data fields in the file. This first line follows:
+
+ArticleTitle    Question        Answer  DifficultyFromQuestioner        DifficultyFromAnswerer  ArticleFile
+
+Field 1 is the name of the Wikipedia article from which questions and answers initially came.
+
+Field 2 is the question.
+
+Field 3 is the answer.
+
+Field 4 is the prescribed difficulty rating for the question as given to the question-writer. 
+
+Field 5 is a difficulty rating assigned by the individual who evaluated and answered the question, 
+which may differ from the difficulty in field 4.
+
+Field 6 is the relative path to the prefix of the article files. html files (.htm) and cleaned 
+text (.txt) files are provided.
 
 [Link to data](http://www.cs.cmu.edu/~ark/QA-data/)
 
@@ -572,7 +595,55 @@ All 3 'question_answer_pairs.txt' were read and combined. The result is below.
 3998 rows × 6 columns
 ```
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)-->
+After that, only Question and Answer columns were extracted to form the below data:
+
+```
+
+	Question						Answer
+0	Was Volta an Italian physicist?				yes
+1	Was Volta an Italian physicist?				yes
+2	Is Volta buried in the city of Pittsburgh?		no
+3	Is Volta buried in the city of Pittsburgh?		no
+4	Did Volta have a passion for the study of elec...	yes
+...	...	...
+3993	What areas do the Grevy's Zebras inhabit?		NaN
+3994	Which species of zebra is known as the common ...	Plains Zebra (Equus quagga, formerly Equus bur...
+3995	Which species of zebra is known as the common ...	Plains Zebra
+3996	At what age can a zebra breed?				five or six
+3997	At what age can a zebra breed?				5 or 6
+3998 rows × 2 columns
+```
+
+There are some null values also. So, we need to remove those rows.
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3998 entries, 0 to 3997
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   Question  3961 non-null   object
+ 1   Answer    3422 non-null   object
+dtypes: object(2)
+memory usage: 62.6+ KB
+```
+
+After removing, the final data has 3422 rows:
+
+```
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 3422 entries, 0 to 3421
+Data columns (total 2 columns):
+ #   Column    Non-Null Count  Dtype 
+---  ------    --------------  ----- 
+ 0   Question  3422 non-null   object
+ 1   Answer    3422 non-null   object
+dtypes: object(2)
+memory usage: 53.6+ KB
+
+```
+
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuestionAnswerDataset_v1_2.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1DQdgNhJ1OXvtJKOvwL44fDFyQi5kiHBg?usp=sharing)
 
@@ -616,11 +687,58 @@ class WikiDataset(SeqDataset):
     
 ```
 
-### Quora Data
+### 2) Quora Data
 
-Task: Generate duplicate question given a question
+**Task: Generate Duplicate Question based on a question**
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)-->
+**Description:**
+
+Quora dataset consists of over 400,000 lines of potential question duplicate pairs. Each line contains IDs for each question in the pair, the full text for each question, and a binary value that indicates whether the line truly contains a duplicate pair.
+
+Sample Data:
+
+```
+	id	qid1	qid2	question1						question2						is_duplicate
+0	0	1	2	What is the step by step guide to invest in sh...	What is the step by step guide to invest in sh...	0
+1	1	3	4	What is the story of Kohinoor (Koh-i-Noor) Dia...	What would happen if the Indian government sto...	0
+2	2	5	6	How can I increase the speed of my internet co...	How can Internet speed be increased by hacking...	0
+3	3	7	8	Why am I mentally very lonely? How can I solve...	Find the remainder when [math]23^{24}[/math] i...	0
+4	4	9	10	Which one dissolve in water quikly sugar, salt...	Which fish would survive in salt water?			0
+```
+
+id - unique questions pair id
+
+qid1 - question 1 id
+
+qid2 - question 2 id
+
+question1 - full text of question 1
+
+question2 - full text of question 2
+
+is_duplicate - 0 indicates not a duplicate pair while 1 indicates dulicate questions
+
+We need to consider question1 and question2 columns for our purpose. Among all rows, only those rows have to be considered where is_duplicate=1.
+
+```
+	question1						question2
+0	Astrology: I am a Capricorn Sun Cap moon and c...	I'm a triple Capricorn (Sun, Moon and ascendan...
+1	How can I be a good geologist?				What should I do to be a great geologist?
+2	How do I read and find my YouTube comments?		How can I see all my Youtube comments?
+3	What can make Physics easy to learn?			How can you make physics easy to learn?
+4	What was your first sexual experience like?		What was your first sexual experience?
+...	...	...
+149258	What are some outfit ideas to wear to a frat p...	What are some outfit ideas wear to a frat them...
+149259	Why is Manaphy childish in Pokémon Ranger and ...	Why is Manaphy annoying in Pokemon ranger and ...
+149260	How does a long distance relationship work?		How are long distance relationships maintained?
+149261	What does Jainism say about homosexuality?		What does Jainism say about Gays and Homosexua...
+149262	Do you believe there is life after death?		Is it true that there is life after death?
+```
+
+Since there are no nulls in above data, we'll be using this data
+
+
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_QuoraDataset.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1nJdOw5nMuQz09YP_OFqLdP8emO_nDJ7E?usp=sharing)
 
@@ -658,11 +776,122 @@ class QuoraDataset(SeqDataset):
 ## Additional Datasets
 ---
 
-### AmbigNQ Light Data
+### 1) AmbigNQ Light Data
 
-Task: Answer a question
+# Sequence to Sequence Prediction on AmbigQA Light Data
+---
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
+**Task: Answer Question**
+
+**Description:**
+
+**AmbigNQ** is a dataset covering 14,042 questions from NQ-open, an existing open-domain QA benchmark. We find that over half of the questions in NQ-open are ambiguous.
+
+We provide two distributions of our new dataset AmbigNQ: a `full` version with all annotation metadata
+and a `light` version with only inputs and outputs.
+
+Here, Iam usig light version.
+
+The light version contains
+- train_light.json (3.3M)
+- dev_light.json (977K)
+
+`{train|dev}_light.json` files contains a list of dictionary that represents a single datapoint, with the following keys:
+
+- `id` (string): an identifier for the question, consistent with the original NQ dataset.
+
+- `question` (string): a question. This is identical to the question in the original NQ except we postprocess the string to start uppercase and end with a question mark.
+
+- `annotations` (a list of dictionaries): a list of all acceptable outputs, where each output is a dictionary that represents either a single answer or multiple question-answer pairs.
+
+    - `type`: `singleAnswer` or `multipleQAs`
+
+    - (If `type` is `singleAnswer`) `answer`: a list of strings that are all acceptable answer texts
+
+    - (If `type` is `multipleQAs`) `qaPairs`: a list of dictionaries with `question` and `answer`. `question` is a string, and `answer` is a list of strings that are all acceptable answer texts
+
+Sample Data:
+
+```
+	annotations						id			question
+0	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-4469503464110108318	When did the simpsons first air on television?
+1	[{'type': 'singleAnswer', 'answer': ['David Mo...	4790842463458965203	Who played george washington in the john adams...
+2	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-6631915997977101143	What is the legal age of marriage in usa?
+3	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-3098213414945179817	Who starred in barefoot in the park on broadway?
+4	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	-927805218867163489	When did the manhattan project began and end?
+...	...	...	...
+10031	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	8643122201694054820	When do the summer holidays start for schools?
+10032	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	9033094464364994905	Who is the band in the movie 10 things i hate ...
+10033	[{'type': 'singleAnswer', 'answer': ['Gwynne E...	9101518012234561119	Who was the last person in the uk to be executed?
+10034	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	926954766593964346	Who does wonder woman end up with in the comics?
+10035	[{'type': 'multipleQAs', 'qaPairs': [{'questio...	98262964342640738	When were the first pair of jordans released?
+10036 rows × 3 columns
+```
+
+After expanding annotations column:
+
+```
+	type		qaPairs							answer	question
+0	multipleQAs	[{'question': 'When did the Simpsons first air...	NaN	When did the simpsons first air on television?
+1	singleAnswer	NaN	[David Morse]	Who played george washington in the john adams...
+2	multipleQAs	[{'question': 'What is the legal age of marria...	NaN	What is the legal age of marriage in usa?
+3	multipleQAs	[{'question': 'Who starred in barefoot in the ...	NaN	Who starred in barefoot in the park on broadway?
+4	multipleQAs	[{'question': 'Based on the initial thoughts o...	NaN	When did the manhattan project began and end?
+...	...	...	...	...
+10246	multipleQAs	[{'question': 'Who is the band at Club Skunk i...	NaN	Who is the band in the movie 10 things i hate ...
+10247	multipleQAs	[{'question': 'Who is the band that performs a...	NaN	Who is the band in the movie 10 things i hate ...
+10248	singleAnswer	NaN	[Gwynne Evans and Peter Allen]	Who was the last person in the uk to be executed?
+10249	multipleQAs	[{'question': 'Who does wonder woman end up wi...	NaN	Who does wonder woman end up with in the comics?
+10250	multipleQAs	[{'question': 'When were the first pair of Air...	NaN	When were the first pair of jordans released?
+10251 rows × 4 columns
+```
+
+Procedure to create question-answer pair:
+
+1) The data was divided into 2 portions:
+
+> 1) type = 'singleAnswer' : for this portion question column was taken and answer was taken from annotations column
+
+```
+	question						answer
+0	Who played george washington in the john adams...	David Morse
+1	When did the frozen ride open at epcot?			June 21, 2016
+2	Name the landforms that form the boundaries of...	Aravali Range, Satpura Range, Vindhyan Range
+3	When was the first airplane used in war?	Blériot XI
+4	When was the first airplane used in war?	Nieuport IV
+...	...	...
+8346	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8347	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8348	Who played alotta fagina in austin powers movie?	Fabiana Udenio
+8349	Who wrote make you feel my love song?	Bob Dylan
+8350	Who was the last person in the uk to be executed?	Gwynne Evans and Peter Allen
+8351 rows × 2 columns
+```
+
+
+> 2) type = 'multipleQAs' : for this portion, qaPairs is converted into question and answer columns expanding over rows.
+
+```
+	question						answer
+0	When did the Simpsons first air on television ...	April 19, 1987
+1	When did the Simpsons first air as a half-hour...	December 17, 1989
+2	What is the legal age of marriage, without par...	18 years of age
+3	What is the legal age of marriage, without par...	18
+4	What is the legal age of marriage, without par...	19
+...	...	...
+19466	Who does wonder woman end up with in All Star ...	General Steven Rockwell Trevor
+19467	Who does wonder woman end up with in All Star ...	Steve Trevor
+19468	Who does wonder woman end up with in the new 52?	Superman and Batman
+19469	When were the first pair of Air Jordans releas...	early 1984
+19470	When were the first pair of Air Jordans releas...	November 17, 1984
+19471 rows × 2 columns
+```
+
+2) Then, both these portion are combined vertically.
+
+3) Steps 1-2 are repeated for both train and test data.
+
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1jEeQQOcejQNy_JRPs6ZbBzRToT4dBAkq?usp=sharing)
 
@@ -727,11 +956,75 @@ class AmbigNqQADataset(SeqDataset):
     
 ```
 
-### Commonsense QA Data
+### 2) Commonsense QA Data
 
-Task: Answer a question
+**Task: Answer Common sense question**
 
-<!--[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_AmbigNQLightDataset.ipynb)-->
+**Description:**
+
+CommonsenseQA is a new multiple-choice question answering dataset that requires different types of commonsense knowledge to predict the correct answers . It contains 12,102 questions with one correct answer and four distractor answers.  The dataset is provided in two major training/validation/testing set splits.
+
+There are 3 JSON files for: train, validate, test.
+
+We will consider train and validate files because test does not contain answers.
+
+Each line in JSON file represents record. Each record consists of: 
+
+1) answerKey:- It denotes the key  or label for correct option.
+
+2) id:- uniques question id
+
+3) question:- It is a dictionary of:
+
+> i) question_concept - denotes the category to which question belong.
+
+> ii) choices - denotes choices among which answer lies. It is a list of dictionary containing:
+
+>> a) label: can be A or B or C or D
+
+>> b) text
+
+> iii) stem
+
+Below is the structure when converted to Data Frame:
+
+```
+    answerKey	id			      question.question_concept	question.choices				question.stem
+0	A	075e483d21c29a511267ef62bedc0461	punishing	[{'label': 'A', 'text': 'ignore'}, {'label': '...	The sanctions against the school were a punish...
+1	B	61fe6e879ff18686d7552425a36344c8	people		[{'label': 'A', 'text': 'race track'}, {'label...	Sammy wanted to go to where the people were. ...
+2	A	4c1cb0e95b99f72d55c068ba0255c54d	choker		[{'label': 'A', 'text': 'jewelry store'}, {'la...	To locate a choker not located in a jewelry bo...
+3	D	02e821a3e53cb320790950aab4489e85	highway		[{'label': 'A', 'text': 'united states'}, {'la...	Google Maps and other highway and street GPS s...
+4	C	23505889b94e880c3e89cff4ba119860	fox		[{'label': 'A', 'text': 'pretty flowers.'}, {'...	The fox walked from the city into the forest, ...
+...	...	...	...	...	...
+9736	E	f1b2a30a1facff543e055231c5f90dd0	going public	[{'label': 'A', 'text': 'consequences'}, {'lab...	What would someone need to do if he or she wan...
+9737	D	a63b4d0c0b34d6e5f5ce7b2c2c08b825	chair		[{'label': 'A', 'text': 'stadium'}, {'label': ...	Where might you find a chair at an office?
+9738	A	22d0eea15e10be56024fd00bb0e4f72f	jeans		[{'label': 'A', 'text': 'shopping mall'}, {'la...	Where would you buy jeans in a place with a la...
+9739	A	7c55160a4630de9690eb328b57a18dc2	well		[{'label': 'A', 'text': 'fairytale'}, {'label'...	John fell down the well. he couldn't believe ...
+9740	C	dd640927f9920930501fb8dc3efc196b	electricity	[{'label': 'A', 'text': 'put in to the water'}...	I forgot to pay the electricity bill, now what...
+9741 rows × 5 columns
+```
+
+To create answer column, answerKey is matched with question.choices.
+
+```
+   answerKey	id				question.question_concept	question.choices				question.stem	answer
+0	A	075e483d21c29a511267ef62bedc0461	punishing	[{'label': 'A', 'text': 'ignore'}, {'label': '...	The sanctions against the school were a punish...	ignore
+1	B	61fe6e879ff18686d7552425a36344c8	people		[{'label': 'A', 'text': 'race track'}, {'label...	Sammy wanted to go to where the people were. ...	populated areas
+2	A	4c1cb0e95b99f72d55c068ba0255c54d	choker		[{'label': 'A', 'text': 'jewelry store'}, {'la...	To locate a choker not located in a jewelry bo...	jewelry store
+3	D	02e821a3e53cb320790950aab4489e85	highway		[{'label': 'A', 'text': 'united states'}, {'la...	Google Maps and other highway and street GPS s...	atlas
+4	C	23505889b94e880c3e89cff4ba119860	fox		[{'label': 'A', 'text': 'pretty flowers.'}, {'...	The fox walked from the city into the forest, ...	natural habitat
+...	...	...	...	...	...	...
+9736	E	f1b2a30a1facff543e055231c5f90dd0	going public	[{'label': 'A', 'text': 'consequences'}, {'lab...	What would someone need to do if he or she wan...	telling all
+9737	D	a63b4d0c0b34d6e5f5ce7b2c2c08b825	chair		[{'label': 'A', 'text': 'stadium'}, {'label': ...	Where might you find a chair at an office?	cubicle
+9738	A	22d0eea15e10be56024fd00bb0e4f72f	jeans		[{'label': 'A', 'text': 'shopping mall'}, {'la...	Where would you buy jeans in a place with a la...	shopping mall
+9739	A	7c55160a4630de9690eb328b57a18dc2	well		[{'label': 'A', 'text': 'fairytale'}, {'label'...	John fell down the well. he couldn't believe ...	fairytale
+9740	C	dd640927f9920930501fb8dc3efc196b	electricity	[{'label': 'A', 'text': 'put in to the water'}...	I forgot to pay the electricity bill, now what...	produce heat
+9741 rows × 6 columns
+```
+
+From above question.stem is selected as question column and answer column are selected.
+
+[Link to Github Code](https://github.com/garima-mahato/END2/blob/main/Session7-SecondHands-on/Assignment2/END2_Session7_Assignment2_CommonsenseQA.ipynb)
 
 [Link to Colab Code](https://colab.research.google.com/drive/1dsE_vbuoCurWxc6i15gMfjkSRDjOETcd?usp=sharing)
 
