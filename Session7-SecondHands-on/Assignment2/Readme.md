@@ -26,7 +26,7 @@
 
 ## Assignment 2
 
-THe datasets are subclasses of:
+The datasets are subclasses of:
 
 ```
 import torch
