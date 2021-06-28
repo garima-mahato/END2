@@ -1,4 +1,4 @@
-# NLP Evolution
+# My Path to NLP Enlightenment
 
 ## 1) [Background and Basics](https://garima-mahato.github.io/END2/Session1-Background_And_Very_Basics)
 
