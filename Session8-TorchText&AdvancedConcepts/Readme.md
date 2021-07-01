@@ -18,25 +18,25 @@ Refer to this [Repo](https://github.com/bentrevett/pytorch-seq2seq).
 
 ## 2 - Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation 
 
-[GitHub Link]()
+[GitHub Link](https://github.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation.ipynb)
 
-[Colab Link]()
+[Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_2_Learning_Phrase_Representations_using_RNN_Encoder_Decoder_for_Statistical_Machine_Translation.ipynb)
 
 Now we have the basic workflow covered, this tutorial will focus on improving our results. Building on our knowledge of PyTorch and torchtext gained from the previous tutorial, we'll cover a second second model, which helps with the information compression problem faced by encoder-decoder models. This model will be based off an implementation of Learning Phrase Representations using RNN Encoder-Decoder for Statistical Machine Translation, which uses GRUs.
 
 ## 3 - Neural Machine Translation by Jointly Learning to Align and Translate 
 
-[GitHub Link]()
+[GitHub Link](https://github.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_3_Neural_Machine_Translation_by_Jointly_Learning_to_Align_and_Translate.ipynb)
 
-[Colab Link]()
+[Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_3_Neural_Machine_Translation_by_Jointly_Learning_to_Align_and_Translate.ipynb)
 
 Next, we learn about attention by implementing Neural Machine Translation by Jointly Learning to Align and Translate. This further allievates the information compression problem by allowing the decoder to "look back" at the input sentence by creating context vectors that are weighted sums of the encoder hidden states. The weights for this weighted sum are calculated via an attention mechanism, where the decoder learns to pay attention to the most relevant words in the input sentence.
 
 ## 4 - Packed Padded Sequences, Masking, Inference and BLEU
 
-[GitHub Link]()
+[GitHub Link](https://github.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_4_Packed_Padded_Sequences%2C_Masking%2C_Inference_and_BLEU.ipynb)
 
-[Colab Link]()
+[Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session8-TorchText%26AdvancedConcepts/END2_Session8_4_Packed_Padded_Sequences%2C_Masking%2C_Inference_and_BLEU.ipynb)
 
 In this notebook, we will improve the previous model architecture by adding packed padded sequences and masking. These are two methods commonly used in NLP. Packed padded sequences allow us to only process the non-padded elements of our input sentence with our RNN. Masking is used to force the model to ignore certain elements we do not want it to look at, such as attention over padded elements. Together, these give us a small performance boost. We also cover a very basic way of using the model for inference, allowing us to get translations for any sentence we want to give to the model and how we can view the attention values over the source sequence for those translations. Finally, we show how to calculate the BLEU metric from our translations.
 
