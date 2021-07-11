@@ -95,6 +95,63 @@ class precision_recall_f1score:
             raise e
 ```
 
+#### Training Logs of Precision, Recall, F1 Score with explanation
+
+```
+Epoch: 08 | Epoch Time: 0m 1s
+	 Train Loss: 0.512 | Train Acc: 80.45%
+	 Val. Loss: 2.123 
+	 Val Metric: Precision, Recall, F1
+	 ======================================
+	 Class | Precision | Recall | F1
+	 ======================================
+	 positive | 0.3987538814544678 | 0.436860054731369 | 0.20846904884291376
+	 negative | 0.43919509649276733 | 0.5516483783721924 | 0.24452021829408901
+	 neutral | 0.2540540397167206 | 0.2326732724905014 | 0.1214470265542746
+	 very positive | 0.49799197912216187 | 0.4542124569416046 | 0.23754789602675389
+	 very negative | 0.40528634190559387 | 0.2067415714263916 | 0.13690476100518295
+	 ======================================
+	 Micro Average F1 Score: 0.2018606024808033
+	 Macro Average F1 Score: 0.18977779014464283
+	 Weighted Average F1 Score: 0.19786720630547747
+Epoch: 09 | Epoch Time: 0m 1s
+	 Train Loss: 0.367 | Train Acc: 86.41%
+	 Val. Loss: 2.589 
+	 Val Metric: Precision, Recall, F1
+	 ======================================
+	 Class | Precision | Recall | F1
+	 ======================================
+	 positive | 0.42064371705055237 | 0.4311717748641968 | 0.21292134245934963
+	 negative | 0.43939393758773804 | 0.38241758942604065 | 0.20446533651249416
+	 neutral | 0.2233918160200119 | 0.31518152356147766 | 0.13073237709661886
+	 very positive | 0.49900200963020325 | 0.45787546038627625 | 0.23877746320975812
+	 very negative | 0.36201781034469604 | 0.27415731549263 | 0.1560102352539963
+	 ======================================
+	 Micro Average F1 Score: 0.1904902539870053
+	 Macro Average F1 Score: 0.1885813509064434
+	 Weighted Average F1 Score: 0.19262911587987164
+Epoch: 10 | Epoch Time: 0m 1s
+	 Train Loss: 0.270 | Train Acc: 89.91%
+	 Val. Loss: 3.245 
+	 Val Metric: Precision, Recall, F1
+	 ======================================
+	 Class | Precision | Recall | F1
+	 ======================================
+	 positive | 0.42147117853164673 | 0.48236632347106934 | 0.22493368817608342
+	 negative | 0.4451901614665985 | 0.4373626410961151 | 0.22062084471733523
+	 neutral | 0.24074074625968933 | 0.3217821717262268 | 0.13771186502373733
+	 very positive | 0.5513513684272766 | 0.37362638115882874 | 0.22270742904316226
+	 very negative | 0.38562092185020447 | 0.26516854763031006 | 0.15712383893443077
+	 ======================================
+	 Micro Average F1 Score: 0.19772593030124036
+	 Macro Average F1 Score: 0.1926195331789498
+	 Weighted Average F1 Score: 0.1988935131090743
+```
+
+As we can see Classwise Precision and Recall and F1 is increasing along with Micro, Macro,Weighted Avg F1 score. This means that the model is improving as it is able to predict more accurately and recalling is improved.
+
+----
+
 ### 2) BLEU Score
 
 [GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
