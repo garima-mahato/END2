@@ -195,6 +195,22 @@ N-gram for candidate sentence:
 
 2) Calculate Modified N-gram Precision
 
+> i) Calculate Clip Counts: For each N-gram,i.e., N=1 to 4,
+
+>> a) Count the maximum number of times a candidate n-gram occurs in any single reference sentence; this is referred to as **Count**.
+
+>> b) For each reference sentence, count the number of times a candidate n-gram occurs. As we have three reference translations, we calculate, Ref 1 count, Ref2 count, and Ref 3 count.
+
+>> c) Take the maximum number of n-grams occurrences in any reference count. Also known as **Max Ref Count**.
+
+>> d) Take the minimum of the **Count** and **Max Ref Count**. Also known as **Count clip** as it clips the total count of each candidate word by its maximum reference count.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_prec_formula2.png)
+
+>> e) Add all these clipped counts.
+
+> ii) Calculate precision:
+
 3) Calculate Brevity Penality
 
 #### Code
