@@ -169,7 +169,23 @@ As we can see Classwise Precision and Recall and F1 is increasing along with Mic
 
 #### Description
 
+**BLEU-Bilingual Evaluation Understudy** is a string matching algorithm.
 
+*Input*:
+
+> Target/Reference Sentence (x): A man sleeping in a green room on a couch.
+
+> Predicted/Candidate Sentence (x_hat): A man is sleeping on a green room on a couch .
+
+*Procedure*
+
+To calculate BLEU Score,
+
+> 1) Calculate N-gram
+
+> 2) Calculate Precision
+
+> 3) Calculate Brevity Penality
 
 #### Code
 
