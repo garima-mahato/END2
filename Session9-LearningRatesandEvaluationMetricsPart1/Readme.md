@@ -181,11 +181,21 @@ As we can see Classwise Precision and Recall and F1 is increasing along with Mic
 
 To calculate BLEU Score,
 
-> 1) Calculate N-gram
+1) Calculate N-gram for N=1 to 4(n_max=4 in my code):
 
-> 2) Calculate Precision
+> An n-gram is a sequence of words occurring within a given window where n represents the window size. For both reference and candidate sentence, 1-gram,2-gram,3-gram and 4-gram are generated.
 
-> 3) Calculate Brevity Penality
+N-gram for reference sentence:
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/ref_ngram.PNG)
+
+N-gram for candidate sentence:
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/cand_ngram.PNG)
+
+2) Calculate Modified N-gram Precision
+
+3) Calculate Brevity Penality
 
 #### Code
 
