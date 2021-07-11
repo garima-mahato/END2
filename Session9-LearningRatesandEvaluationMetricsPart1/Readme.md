@@ -221,9 +221,9 @@ N-gram for candidate sentence:
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_bp1.png)
 
-where r- count of words in a reference sentence,
+> where r- count of words in a reference sentence,
 
-c- count of words in a candidate sentence
+> c- count of words in a candidate sentence
 
 4) Calculate BLEU Score
 
@@ -347,7 +347,28 @@ def calculate_bleu(model, max_n=4):
 
 [Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
 
-Perplexity means agitated/entangled state. Agitation or Randomness of a system is measured by entropy of the system. 
+#### Description
+
+Perplexity means agitated/entangled state. Agitation or Randomness of a system is measured by entropy of the system. Entropy is the average number of bits to encode the information contained in a random variable. To represent 16 numbers in binary format, we would need log<sub>2</sub>(16)=4 bits(entropy). Perplexity is exponentiation of entropy, which is 2<sup>entropy</sup> = 2<sup>4</sup> = 16. So, the exponentiation of the entropy should be the total amount of all possible information, or, the weighted average number of choices a random variable has.
+
+Entropy is defined as H(p) =-Σ p(x) log p(x)
+
+Perplexity is P = e<sup>H(p)</sup> = e<sup>-Σ p(x) log p(x)</sup>
+
+
+*Input*:
+
+> Target/Reference Sentence (x): A man sleeping in a green room on a couch.
+
+> Predicted/Candidate Sentence (x_hat): A man is sleeping on a green room on a couch .
+
+*Procedure*
+
+To calculate Perplexity,
+
+1) Calculate Categorical Cross-entropy as C
+
+2) Calculate Perplexity as np.exp(C)
 
 #### Code
 
