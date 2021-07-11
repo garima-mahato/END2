@@ -341,25 +341,48 @@ To calculate BERT Score,
 
 >> Predicted/Candidate Contextual Embeddings: *X_hat*
 
-2) Calculate BERT Score:
+2) Calculate Pairwise Cosine Similarity among Contextual Embeddings Vector:
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_img2.PNG)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_pairwise_cosine_sim.PNG)
 
 > Each vector in embedding is represented as below.
 
->> Target/Reference Embedding: X<sub>i</sub>
+>> Target/Reference Token Vector: X<sub>i</sub>
 
->> Predicted/Candidate Tokens: X_hat<sub>i</sub>
+>> Predicted/Candidate Token Vector: X_hat<sub>j</sub>
 
-> **Cosine similarity = (X<sub>i</sub><sup>T</sup> * X_hat<sub>i</sub>) / (||X<sub>i</sub>|| * ||X_hat<sub>i</sub>||)**
+> For each vector X<sub>i</sub> in Reference Tokens, each X_hat<sub>j</sub> vector from candidate tokens is considered one by one. For each pair of (X<sub>i</sub> , X_hat<sub>j</sub>), cosine similarity is calculated as below.
 
-> Since the vectors X<sub>i</sub> and X_hat<sub>i</sub> are normalized, the calculation of cosine similarity reduces to **(X<sub>i</sub><sup>T</sup> * X_hat<sub>i</sub>)**
+> **Cosine similarity = (X<sub>i</sub><sup>T</sup> * X_hat<sub>j</sub>) / (||X<sub>i</sub>|| * ||X_hat<sub>j</sub>||)**
 
->> i) Calculate Precision:
+> Since the vectors X<sub>i</sub> and X_hat<sub>j</sub> are normalized, the calculation of cosine similarity reduces to **(X<sub>i</sub><sup>T</sup> * X_hat<sub>j</sub>)**
 
->> ii) Calculate Recall:
+3) Calculate BERT SCore:
 
->> iii) Calculate F1 Score:
+> i) Calculate Precision:
+
+>> For each token vector X_hat<sub>j</sub> in candidate tokens, maximum of cosine similarity score of X_hat<sub>j</sub> with all X<sub>i</sub> reference tokens is taken as the similarity measure for that X_hat<sub>j</sub> token vector. To calculate precision for the entire sentence:
+
+>>> a) With Importance Weighing: Previous work on similarity measures demonstrated that rare words can be more indicative for sentence similarity than common words. Inverse document frequency(IDF) is used to measure the importance of words. IDF scores are computed on corpus. Then weighted average of all cosine similarity of X_hat<sub>j</sub> with their IDF score is calculated. This average is the precision for the sentence.
+
+>>> b) Without Importance Weighing: Average of all cosine similarity of X_hat<sub>j</sub> is calculated. This average is the precision for the sentence.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_precision_formula.PNG)
+
+> ii) Calculate Recall:
+
+>> For each token vector X<sub>i</sub> in refernce tokens, maximum of cosine similarity score of X<sub>i</sub> with all X_hat<sub>j</sub> reference tokens is taken as the similarity measure for that X<sub>i</sub> token vector. To calculate recall for the entire sentence:
+
+>>> a) With Importance Weighing: Previous work on similarity measures demonstrated that rare words can be more indicative for sentence similarity than common words. Inverse document frequency(IDF) is used to measure the importance of words. IDF scores are computed on corpus. Then weighted average of all cosine similarity of X<sub>i</sub> with their IDF score is calculated. This average is the recall for the sentence.
+
+>>> b) Without Importance Weighing: Average of all cosine similarity of X<sub>i</sub> is calculated. This average is the recall for the sentence.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_recall_formula.PNG)
+
+> iii) Calculate F1 Score: F1 score is the harmonic ean of above calculated precision and recall.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_fscore_formula.PNG)
+
 
 >> Target/Reference Contextual Embeddings: *X*
 
