@@ -343,7 +343,7 @@ To calculate BERT Score,
 
 2) Calculate Pairwise Cosine Similarity among Contextual Embeddings Vector:
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_pairwise_cosine_sim.PNG)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_pairwise_cosine_sim.png)
 
 > Each vector in embedding is represented as below.
 
