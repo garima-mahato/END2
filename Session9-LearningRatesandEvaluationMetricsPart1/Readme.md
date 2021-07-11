@@ -36,6 +36,8 @@ Questions asked are:
 
 ### 1) Recall, Precision, and F1 Score
 
+These are used for classification tasks.
+
 [GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_Assignment_SentimentClassification_On_SSTDataset_Precision%2CRecall%2CF1Metric.ipynb)
 
 [Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_Assignment_SentimentClassification_On_SSTDataset_Precision%2CRecall%2CF1Metric.ipynb)
@@ -45,6 +47,12 @@ Questions asked are:
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/prf1.png)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/prf2.png)
+
+Precision(P): ratio of sentences correctly predicted to the total sentences predicted for a class.
+
+Recall(R): ratio of sentences correctly predicted to the total sentences belonging to a class.
+
+F-Score: harmonic mean of precision and recall (PR/(P+R))
 
 #### Code
 
