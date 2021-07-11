@@ -42,7 +42,9 @@ Questions asked are:
 
 #### Description
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/prf1.png)
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/prf2.png)
 
 #### Code
 
