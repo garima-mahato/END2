@@ -327,7 +327,7 @@ To calculate BERT Score,
 
 1) Convert Target/Reference Sentence and Predicted/Candidate Sentence to Contextual Embeddings:
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_img2.PNG)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_img2.png)
 
 > Both the sentences are tokenized.
 
