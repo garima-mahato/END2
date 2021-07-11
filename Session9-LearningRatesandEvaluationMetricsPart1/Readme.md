@@ -446,6 +446,8 @@ Epoch: 5:- Train loss: 2.481 | Val PPL: 11.615 | Val BLEU Score: 0.234 | Val BER
 
 ### Explanation
 
+**Note: Reference sentence means Target/Human annotated text. Candidate Sentence means Model generated text.**
+
 #### 1) Perplexity
 
 ```
@@ -468,7 +470,7 @@ Epoch: 4:- Train loss: 2.771 | Val BLEU Score: 0.204 || Epoch time = 44.338s
 Epoch: 5:- Train loss: 2.481 | Val BLEU Score: 0.234 || Epoch time = 44.738s
 ```
 
-We can see a increasing BLEU Score trend. 
+We can see an increasing BLEU Score trend. BLEU score is product of brevity penality(BP),which is best match length, and exponentiation of summation of weighted 1-gram, 2-gram, 3-gram, 4-gram presence count(cout of n-grams present in both reference and candidate sentence) known as modified precision. As BLEU score increases, BP and precsion increases. Higher BP means candidate translation will match the reference translations in length, in word choice, and word order. Higher precision means 1-gram, 2-gram, 3-gram and 4-gram of candidate are occurring more in number in reference sentences. Thus, predicted and target sentences are becoming similar and hence model is improving.
 
 #### 3) BERT Score
 
@@ -480,7 +482,7 @@ Epoch: 4:- Train loss: 2.771 | Val BERT Score: Precision - 0.906, Recall - 0.917
 Epoch: 5:- Train loss: 2.481 | Val BERT Score: Precision - 0.913, Recall - 0.924, F1 Score - 0.918 || Epoch time = 44.738s
 ```
 
-We can see a increasing precision, recall and f1 score of BERT Score trend. BERTScore leverages the pre-trained contextual embeddings from BERT and matches words in candidate and reference sentences by cosine similarity to calculate precision, recall and F1 score. 
+We can see an increasing precision, recall and f1 score of BERT Score trend. BERTScore leverages the pre-trained contextual embeddings from BERT and matches words in candidate and reference sentences by cosine similarity to calculate precision, recall and F1 score. 
 
 For precision, each token in candidate sentence is matched by cosine similarity with all the tokens of reference sentence pairwise and the pair with maximum similarity becomes the precision score for that token. Mean of all the precision scores becomes precision of the model for that sentence. Precision scores for dataset is calculated in batches and their mean is the Precision of the model shown here. Increasing precision means increasing individual precision scores which in turn means increasing cosine similarity among reference and candidate tokens. Increasing cosine similarity means predicted and target sentences have words which are becoming more similar in nature. Thus, model is becoming better at generating text similar in nature to target text.
 
