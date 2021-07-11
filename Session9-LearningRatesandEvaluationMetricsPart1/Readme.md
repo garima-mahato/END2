@@ -211,7 +211,35 @@ N-gram for candidate sentence:
 
 > ii) Calculate precision:
 
-3) Calculate Brevity Penality
+>> i) Finally, divide the clipped counts by the total (unclipped) number of candidate n-grams to get the modified precision score.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_prec_formula3.png)
+
+3) Calculate Brevity Penality: 
+
+> It penalizes too short translations. It will be 1 when candidate sentence length is equal to reference sentence length.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_bp1.png)
+
+where r- count of words in a reference sentence,
+
+c- count of words in a candidate sentence
+
+4) Calculate BLEU Score
+
+> BLEU is calculated using the below formula:
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_formula1.png)
+
+> where BP- brevity penalty,
+
+> N: No. of n-grams, we usually use unigram, bigram, 3-gram, 4-gram,
+
+> wₙ: Weight for each modified precision, by default N is 4, wₙ is 1/4=0.25,
+
+> Pₙ: Modified precision
+
+> BLEU metric ranges from 0 to 1. BLEU score will be 1 when the predicted sentence is identical to one of the target sentence.
 
 #### Code
 
