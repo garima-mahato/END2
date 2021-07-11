@@ -31,8 +31,8 @@ Questions asked are:
 
 ### 1) Recall, Precision, and F1 Score
 
-[GitHub Notebook Link]()
-[Google Colab Link]()
+[GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_Assignment_SentimentClassification_On_SSTDataset_Precision%2CRecall%2CF1Metric.ipynb)
+[Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_Assignment_SentimentClassification_On_SSTDataset_Precision%2CRecall%2CF1Metric.ipynb)
 
 **Code**
 
@@ -96,8 +96,8 @@ class precision_recall_f1score:
 
 ### 2) BLEU Score
 
-[GitHub Notebook Link]()
-[Google Colab Link]()
+[GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
+[Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
 
 **Code**
 
@@ -136,8 +136,8 @@ def calculate_bleu(model, max_n=4):
 
 ### 3) Perplexity
 
-[GitHub Notebook Link]()
-[Google Colab Link]()
+[GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
+[Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
 
 Perplexity means agitated/entangled state. Agitation or Randomness of a system is measured by entropy of the system. 
 
@@ -171,8 +171,8 @@ perplexity = np.exp(val_loss)
 
 ### 4) BERT Score
 
-[GitHub Notebook Link]()
-[Google Colab Link]()
+[GitHub Notebook Link](https://github.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
+[Google Colab Link](https://githubtocolab.com/garima-mahato/END2/blob/main/Session9-LearningRatesandEvaluationMetricsPart1/END2_Session9_BLEU_PPL_BertScore.ipynb)
 
 **Code**
 
