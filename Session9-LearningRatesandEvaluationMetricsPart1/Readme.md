@@ -458,6 +458,8 @@ Epoch: 4:- Train loss: 2.771 | Val PPL: 13.789 || Epoch time = 44.338s
 Epoch: 5:- Train loss: 2.481 | Val PPL: 11.615 || Epoch time = 44.738s
 ```
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/ppl_graph.PNG)
+
 We can see a diminishing perplexity trend which indicates that the model is learning and is becoming and lesser confused. Perplexity is exponentiation of entropy. Lesser the perplexity, lesser the entropy(randomness) of the model. Thus, a better model at predicting.
 
 #### 2) BLEU Score
@@ -469,6 +471,8 @@ Epoch: 3:- Train loss: 3.163 | Val BLEU Score: 0.166 || Epoch time = 43.619s
 Epoch: 4:- Train loss: 2.771 | Val BLEU Score: 0.204 || Epoch time = 44.338s
 Epoch: 5:- Train loss: 2.481 | Val BLEU Score: 0.234 || Epoch time = 44.738s
 ```
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bleu_graph.PNG)
 
 We can see an increasing BLEU Score trend. BLEU score is product of brevity penality(BP),which is best match length, and exponentiation of summation of weighted 1-gram, 2-gram, 3-gram, 4-gram presence count(cout of n-grams present in both reference and candidate sentence) known as modified precision. As BLEU score increases, BP and precsion increases. Higher BP means candidate translation will match the reference translations in length, in word choice, and word order. Higher precision means 1-gram, 2-gram, 3-gram and 4-gram of candidate are occurring more in number in reference sentences. Thus, predicted and target sentences are becoming similar and hence model is improving.
 
@@ -484,8 +488,16 @@ Epoch: 5:- Train loss: 2.481 | Val BERT Score: Precision - 0.913, Recall - 0.924
 
 We can see an increasing precision, recall and f1 score of BERT Score trend. BERTScore leverages the pre-trained contextual embeddings from BERT and matches words in candidate and reference sentences by cosine similarity to calculate precision, recall and F1 score. 
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_precision_graph.PNG)
+
 For precision, each token in candidate sentence is matched by cosine similarity with all the tokens of reference sentence pairwise and the pair with maximum similarity becomes the precision score for that token. Mean of all the precision scores becomes precision of the model for that sentence. Precision scores for dataset is calculated in batches and their mean is the Precision of the model shown here. Increasing precision means increasing individual precision scores which in turn means increasing cosine similarity among reference and candidate tokens. Increasing cosine similarity means predicted and target sentences have words which are becoming more similar in nature. Thus, model is becoming better at generating text similar in nature to target text.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_recall_graph.PNG)
 
 For recall, each token in reference sentence is matched by cosine similarity with all the tokens of candidate sentence pairwise and the pair with maximum similarity becomes the recall score for that token. Mean of all the recall scores becomes precision of the model for that sentence. Recall scores for dataset is calculated in batches and their mean is the recall of the model shown here. Increasing recall means increasing individual recall scores which in turn means increasing cosine similarity among reference and candidate tokens. Increasing cosine similarity means predicted and target sentences have words which are becoming more similar in nature. Thus, model is becoming better at remembering context from target text.
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_f1_graph.PNG)
+
 For F1 Score, harmonic mean of precion score and recall score for each batch is calculated. F1 scores for model,which is shown here, is mean of the F1 score of all the batches in the dataset. Increasing f1 means better precision and recall of the model. Thus, model is becoming not only better at generating text similar to target text but also becoming better at remembering context from target text.
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/perplexity_bleu_bert_score_comp_graph.PNG)
