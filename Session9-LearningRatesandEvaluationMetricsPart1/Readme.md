@@ -430,3 +430,60 @@ def calculate_bert_score(model):
         
     return P, R, F1
 ```
+---
+
+## Training Logs of BLEU Score, Perplexity and Bert Score with Explanation
+
+### Training Logs
+
+```
+Epoch: 1:- Train loss: 5.321 | Val PPL: 61.466 | Val BLEU Score: 0.036 | Val BERT Score: Precision - 0.844, Recall - 0.871, F1 Score - 0.857 || Epoch time = 41.566s
+Epoch: 2:- Train loss: 3.768 | Val PPL: 28.040 | Val BLEU Score: 0.107 | Val BERT Score: Precision - 0.882, Recall - 0.896, F1 Score - 0.889 || Epoch time = 44.592s
+Epoch: 3:- Train loss: 3.163 | Val PPL: 18.227 | Val BLEU Score: 0.166 | Val BERT Score: Precision - 0.898, Recall - 0.908, F1 Score - 0.903 || Epoch time = 43.619s
+Epoch: 4:- Train loss: 2.771 | Val PPL: 13.789 | Val BLEU Score: 0.204 | Val BERT Score: Precision - 0.906, Recall - 0.917, F1 Score - 0.911 || Epoch time = 44.338s
+Epoch: 5:- Train loss: 2.481 | Val PPL: 11.615 | Val BLEU Score: 0.234 | Val BERT Score: Precision - 0.913, Recall - 0.924, F1 Score - 0.918 || Epoch time = 44.738s
+```
+
+### Explanation
+
+#### 1) Perplexity
+
+```
+Epoch: 1:- Train loss: 5.321 | Val PPL: 61.466 || Epoch time = 41.566s
+Epoch: 2:- Train loss: 3.768 | Val PPL: 28.040 || Epoch time = 44.592s
+Epoch: 3:- Train loss: 3.163 | Val PPL: 18.227 || Epoch time = 43.619s
+Epoch: 4:- Train loss: 2.771 | Val PPL: 13.789 || Epoch time = 44.338s
+Epoch: 5:- Train loss: 2.481 | Val PPL: 11.615 || Epoch time = 44.738s
+```
+
+We can see a diminishing perplexity trend which indicates that the model is learning and is becoming and lesser confused. Perplexity is exponentiation of entropy. Lesser the perplexity, lesser the entropy(randomness) of the model. Thus, a better model at predicting.
+
+#### 2) BLEU Score
+
+```
+Epoch: 1:- Train loss: 5.321 | Val BLEU Score: 0.036 || Epoch time = 41.566s
+Epoch: 2:- Train loss: 3.768 | Val BLEU Score: 0.107 || Epoch time = 44.592s
+Epoch: 3:- Train loss: 3.163 | Val BLEU Score: 0.166 || Epoch time = 43.619s
+Epoch: 4:- Train loss: 2.771 | Val BLEU Score: 0.204 || Epoch time = 44.338s
+Epoch: 5:- Train loss: 2.481 | Val BLEU Score: 0.234 || Epoch time = 44.738s
+```
+
+We can see a increasing BLEU Score trend. 
+
+#### 3) BERT Score
+
+```
+Epoch: 1:- Train loss: 5.321 | Val BERT Score: Precision - 0.844, Recall - 0.871, F1 Score - 0.857 || Epoch time = 41.566s
+Epoch: 2:- Train loss: 3.768 | Val BERT Score: Precision - 0.882, Recall - 0.896, F1 Score - 0.889 || Epoch time = 44.592s
+Epoch: 3:- Train loss: 3.163 | Val BERT Score: Precision - 0.898, Recall - 0.908, F1 Score - 0.903 || Epoch time = 43.619s
+Epoch: 4:- Train loss: 2.771 | Val BERT Score: Precision - 0.906, Recall - 0.917, F1 Score - 0.911 || Epoch time = 44.338s
+Epoch: 5:- Train loss: 2.481 | Val BERT Score: Precision - 0.913, Recall - 0.924, F1 Score - 0.918 || Epoch time = 44.738s
+```
+
+We can see a increasing precision, recall and f1 score of BERT Score trend. BERTScore leverages the pre-trained contextual embeddings from BERT and matches words in candidate and reference sentences by cosine similarity to calculate precision, recall and F1 score. 
+
+For precision, each token in candidate sentence is matched by cosine similarity with all the tokens of reference sentence pairwise and the pair with maximum similarity becomes the precision score for that token. Mean of all the precision scores becomes precision of the model for that sentence. Precision scores for dataset is calculated in batches and their mean is the Precision of the model shown here. Increasing precision means increasing individual precision scores which in turn means increasing cosine similarity among reference and candidate tokens. Increasing cosine similarity means predicted and target sentences have words which are becoming more similar in nature. Thus, model is becoming better at generating text similar in nature to target text.
+
+For recall, each token in reference sentence is matched by cosine similarity with all the tokens of candidate sentence pairwise and the pair with maximum similarity becomes the recall score for that token. Mean of all the recall scores becomes precision of the model for that sentence. Recall scores for dataset is calculated in batches and their mean is the recall of the model shown here. Increasing recall means increasing individual recall scores which in turn means increasing cosine similarity among reference and candidate tokens. Increasing cosine similarity means predicted and target sentences have words which are becoming more similar in nature. Thus, model is becoming better at remembering context from target text.
+
+For F1 Score, harmonic mean of precion score and recall score for each batch is calculated. F1 scores for model,which is shown here, is mean of the F1 score of all the batches in the dataset. Increasing f1 means better precision and recall of the model. Thus, model is becoming not only better at generating text similar to target text but also becoming better at remembering context from target text.

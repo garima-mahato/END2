@@ -32,14 +32,14 @@ class precision_recall_f1score:
             for k in self.labels:
                 self.classwise_prec_recall_f1[k]['precision'] = (self.classwise_correct_pred[k]/self.classwise_pred[k]).item()
                 self.classwise_prec_recall_f1[k]['recall'] = (self.classwise_correct_pred[k]/self.classwise_target[k]).item()
-                self.classwise_prec_recall_f1[k]['f1'] = (self.classwise_prec_recall_f1[k]['precision'] * self.classwise_prec_recall_f1[k]['recall'])/(self.classwise_prec_recall_f1[k]['precision'] + self.classwise_prec_recall_f1[k]['recall'] + 1e-20)
+                self.classwise_prec_recall_f1[k]['f1'] = (2 * self.classwise_prec_recall_f1[k]['precision'] * self.classwise_prec_recall_f1[k]['recall'])/(self.classwise_prec_recall_f1[k]['precision'] + self.classwise_prec_recall_f1[k]['recall'] + 1e-20)
 
                 self.global_fp += self.classwise_pred[k] - self.classwise_correct_pred[k]
                 self.global_fn += self.classwise_target[k] - self.classwise_correct_pred[k]
 
             self.micro_prec = self.global_tp/(self.global_tp+self.global_fp.item())
             self.micro_recall = self.global_tp/(self.global_tp+self.global_fn.item())
-            self.micro_avg_f1 = (self.micro_prec * self.micro_recall) / (self.micro_prec + self.micro_recall + 1e-20)
+            self.micro_avg_f1 = (2 * self.micro_prec * self.micro_recall) / (self.micro_prec + self.micro_recall + 1e-20)
 
             self.macro_precision = np.average([self.classwise_prec_recall_f1[k]['precision'] for k in self.classwise_correct_pred.keys()])
             self.macro_recall = np.average([self.classwise_prec_recall_f1[k]['recall'] for k in self.classwise_correct_pred.keys()])
