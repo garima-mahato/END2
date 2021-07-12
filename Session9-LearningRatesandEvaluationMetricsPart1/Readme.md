@@ -167,6 +167,8 @@ Epoch: 10 | Epoch Time: 0m 1s
 	 Weighted Average F1 Score: 0.1988935131090743
 ```
 
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/prec_recall_f1_micro_macro_wgt_f1_comp_graph.png)
+
 As we can see Classwise Precision and Recall and F1 is increasing along with Micro, Macro,Weighted Avg F1 score. This means that the model is improving as it is able to predict more accurately and recalling is improved.
 
 ----
@@ -745,5 +747,7 @@ For recall, each token in reference sentence is matched by cosine similarity wit
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/bert_score_f1_graph.PNG)
 
 For F1 Score, harmonic mean of precion score and recall score for each batch is calculated. F1 scores for model,which is shown here, is mean of the F1 score of all the batches in the dataset. Increasing f1 means better precision and recall of the model. Thus, model is becoming not only better at generating text similar to target text but also becoming better at remembering context from target text.
+
+#### Comparison of Evaluation Metrics(BLEU, Perplexity and BERT Score)
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session9-LearningRatesandEvaluationMetricsPart1/assets/perplexity_bleu_bert_score_comp_graph.PNG)
