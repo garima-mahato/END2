@@ -263,14 +263,19 @@ Training Logs
 Observations
 </pre></td>
 
-<td><pre>Better loss when comared with 50 and 300 glove dimension pretrained networks. Need to compare with 200 glove embedding to compare performance.</pre></td>
+<td><pre>Better loss when comared with 50 and 300 glove dimension pretrained networks. 
+Need to compare with 200 glove embedding to compare performance.</pre></td>
 
 <td><pre>
-When compared with no embeddings, we see higher loss because hidden dimension was increased from 256 to 300. Although the encoder has to learn less because of pretrained weights, the decoder's learning task is increased due to additional hidden dimension. It has to capture more context.
+When compared with no embeddings, we see higher loss because hidden dimension was increased from 256 to 300.
+Although the encoder has to learn less because of pretrained weights, the decoder's learning task is increased due to additional hidden dimension. 
+It has to capture more context.
 </pre></td>
 
 <td><pre>
-When compared with no embeddings, we see higher loss because hidden dimension was decreased from 256 to 50. Lesser context is captured by the embedding dimension and so lesser information is captured by the model. Thus, the model's is nt capable to learn the translation.
+When compared with no embeddings, we see higher loss because hidden dimension was decreased from 256 to 50. 
+Lesser context is captured by the embedding dimension and so lesser information is captured by the model. 
+Thus, the model's is nt capable to learn the translation.
 </pre></td>
 </tr>
 
