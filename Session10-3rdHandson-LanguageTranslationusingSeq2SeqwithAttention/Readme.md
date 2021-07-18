@@ -53,3 +53,13 @@ Training with Teacher Forcing converges faster. This is because in the early sta
 Cons:
 
 During inference, since there is usually no ground truth available, the model will need to feed its own previous prediction back to itself for the next prediction. Therefore there is a discrepancy between training and inference, and this might lead to poor model performance and instability. This is known as **Exposure Bias**.
+
+**Teacher Forcing with 50% probability is used here.**
+
+## Improvements
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/imp1.PNG)
+
+1) LSTM and Bi-directional LSTMs can be used instead of RNN
+
+2) Adam optimizer can be used instead of SGD
