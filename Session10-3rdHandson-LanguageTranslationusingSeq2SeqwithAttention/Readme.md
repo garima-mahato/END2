@@ -16,7 +16,21 @@
 # Solution
 ---
 
-**Task: English to Frensch Translation**
+**Task: English to French Translation**
+
+
+
+https://user-images.githubusercontent.com/52399940/126055430-25b66751-6f3a-46e3-af25-d22e8007439f.mp4
+
+
+
+## Architecture
+
+
+
+### Encoder
+
+### Decoder
 
 https://user-images.githubusercontent.com/52399940/126055121-8056ae8e-ee73-4698-a0e5-b9fb93c1313c.mp4
 
