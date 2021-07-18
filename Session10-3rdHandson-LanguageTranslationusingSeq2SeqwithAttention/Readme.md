@@ -193,6 +193,23 @@ Hidden Dimension Size
 </tr>
 
 <tr>
+<td><pre>
+Link to Code
+</pre></td>
+
+<td><pre>[Colab](https://colab.research.google.com/drive/19pMTnQlp6YItdmIuj5V3s9X7VR1W0sF9?usp=sharing#scrollTo=v-45b8_lHRiK)
+</pre></td>
+
+<td><pre>[Github]((https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb))
+[Colab]((https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb))
+</pre></td>
+
+<td><pre>[Github](https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)
+[Colab](https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)
+</pre></td>
+</tr>
+
+<tr>
 
 <td>
 <pre>
