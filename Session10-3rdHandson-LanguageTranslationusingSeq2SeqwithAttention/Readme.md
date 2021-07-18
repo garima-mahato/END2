@@ -197,15 +197,15 @@ Hidden Dimension Size
 Link to Code
 </pre></td>
 
-<td><pre>[Colab](https://colab.research.google.com/drive/19pMTnQlp6YItdmIuj5V3s9X7VR1W0sF9?usp=sharing#scrollTo=v-45b8_lHRiK)
+<td><pre><a href="https://colab.research.google.com/drive/19pMTnQlp6YItdmIuj5V3s9X7VR1W0sF9?usp=sharing#scrollTo=v-45b8_lHRiK">Colab</a>
 </pre></td>
 
-<td><pre>[Github]((https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb))
-[Colab]((https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb))
+<td><pre><a href="https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb">GitHub</a>
+<a href="https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb">Colab</a>
 </pre></td>
 
-<td><pre>[Github](https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)
-[Colab](https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)
+<td><pre><a href="https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb">GitHub</a>
+<a href="https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/TSAI_END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb">Colab</a>
 </pre></td>
 </tr>
 
@@ -308,6 +308,6 @@ Thus, the model's is nt capable to learn the translation.
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/imp1.PNG)
 
-1) LSTM and Bi-directional LSTMs can be used instead of RNN
+1) LSTM and Bi-directional LSTMs can be used instead of RNN. ([Reference paper](https://aclanthology.org/W17-5708.pdf))
 
 2) Adam optimizer can be used instead of SGD
