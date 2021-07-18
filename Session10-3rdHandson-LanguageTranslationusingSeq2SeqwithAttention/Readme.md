@@ -14,6 +14,11 @@
 # Solution
 ---
 
+<video width="100%" height="auto" loop="" autoplay="" controls="">
+   <source src="https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/attention_process1.mp4" type="video/mp4">
+   Your browser does not support the video tag.
+</video>
+
 ## Teacher Forcing
 
 **Teacher Forcing** is a technique to quickly and efficiently train recurrent neural network models that use the ground truth from a prior time step as input. In sequence prediction models, the output from the last time step y(t-1) as input for the model at the current time step X(t). It is used in tasks such as Machine Translation, Caption Generation, Text Summarization, etc.
