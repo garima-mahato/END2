@@ -18,6 +18,9 @@
 
 **Task: English to French Translation**
 
+| GitHub Link | Google Colab Link |
+|---|---|
+|[Link to Code](https://github.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)|[Link to Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/END2_Session10_END2_Translation_using_Seq2Seq_and_Attention.ipynb)
 
 
 <!--https://user-images.githubusercontent.com/52399940/126055430-25b66751-6f3a-46e3-af25-d22e8007439f.mp4-->
@@ -43,16 +46,21 @@
 ### Training Logs
 
 ```
-6m 23s (- 89m 29s) (5000 6%) 3.4010
-12m 43s (- 82m 41s) (10000 13%) 2.7494
-19m 3s (- 76m 13s) (15000 20%) 2.3543
-25m 24s (- 69m 51s) (20000 26%) 2.0915
-31m 46s (- 63m 32s) (25000 33%) 1.8712
-38m 7s (- 57m 10s) (30000 40%) 1.6453
-44m 29s (- 50m 50s) (35000 46%) 1.5507
-50m 55s (- 44m 33s) (40000 53%) 1.3937
-57m 19s (- 38m 12s) (45000 60%) 1.2722
-63m 44s (- 31m 52s) (50000 66%) 1.1702
+6m 27s (- 90m 21s) (5000 6%) 3.4356
+12m 50s (- 83m 30s) (10000 13%) 2.7440
+19m 16s (- 77m 6s) (15000 20%) 2.3890
+25m 41s (- 70m 38s) (20000 26%) 2.1120
+32m 6s (- 64m 13s) (25000 33%) 1.8726
+38m 32s (- 57m 48s) (30000 40%) 1.6580
+44m 57s (- 51m 22s) (35000 46%) 1.5425
+51m 24s (- 44m 59s) (40000 53%) 1.3826
+57m 49s (- 38m 33s) (45000 60%) 1.2583
+64m 14s (- 32m 7s) (50000 66%) 1.1682
+70m 39s (- 25m 41s) (55000 73%) 1.0912
+77m 4s (- 19m 16s) (60000 80%) 1.0004
+83m 29s (- 12m 50s) (65000 86%) 0.9606
+89m 52s (- 6m 25s) (70000 93%) 0.9084
+96m 12s (- 0m 0s) (75000 100%) 0.8534
 ```
 
 
