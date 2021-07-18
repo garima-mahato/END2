@@ -93,9 +93,9 @@ During inference, since there is usually no ground truth available, the model wi
 
 **Attention Visualization**
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis1.png)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis1.PNG)
 
-![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis2.png)
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis2.PNG)
 
 ## Evaluation
 
