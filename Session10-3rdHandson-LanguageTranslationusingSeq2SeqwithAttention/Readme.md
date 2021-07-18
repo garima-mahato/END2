@@ -43,26 +43,6 @@
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/attention_tensor_dance.gif)
 
-### Training Logs
-
-```
-6m 27s (- 90m 21s) (5000 6%) 3.4356
-12m 50s (- 83m 30s) (10000 13%) 2.7440
-19m 16s (- 77m 6s) (15000 20%) 2.3890
-25m 41s (- 70m 38s) (20000 26%) 2.1120
-32m 6s (- 64m 13s) (25000 33%) 1.8726
-38m 32s (- 57m 48s) (30000 40%) 1.6580
-44m 57s (- 51m 22s) (35000 46%) 1.5425
-51m 24s (- 44m 59s) (40000 53%) 1.3826
-57m 49s (- 38m 33s) (45000 60%) 1.2583
-64m 14s (- 32m 7s) (50000 66%) 1.1682
-70m 39s (- 25m 41s) (55000 73%) 1.0912
-77m 4s (- 19m 16s) (60000 80%) 1.0004
-83m 29s (- 12m 50s) (65000 86%) 0.9606
-89m 52s (- 6m 25s) (70000 93%) 0.9084
-96m 12s (- 0m 0s) (75000 100%) 0.8534
-```
-
 
 
 ## Teacher Forcing
@@ -86,6 +66,80 @@ Cons:
 During inference, since there is usually no ground truth available, the model will need to feed its own previous prediction back to itself for the next prediction. Therefore there is a discrepancy between training and inference, and this might lead to poor model performance and instability. This is known as **Exposure Bias**.
 
 **Teacher Forcing with 50% probability is used here.**
+
+## Training
+
+### Training Logs
+
+```
+6m 27s (- 90m 21s) (5000 6%) 3.4356
+12m 50s (- 83m 30s) (10000 13%) 2.7440
+19m 16s (- 77m 6s) (15000 20%) 2.3890
+25m 41s (- 70m 38s) (20000 26%) 2.1120
+32m 6s (- 64m 13s) (25000 33%) 1.8726
+38m 32s (- 57m 48s) (30000 40%) 1.6580
+44m 57s (- 51m 22s) (35000 46%) 1.5425
+51m 24s (- 44m 59s) (40000 53%) 1.3826
+57m 49s (- 38m 33s) (45000 60%) 1.2583
+64m 14s (- 32m 7s) (50000 66%) 1.1682
+70m 39s (- 25m 41s) (55000 73%) 1.0912
+77m 4s (- 19m 16s) (60000 80%) 1.0004
+83m 29s (- 12m 50s) (65000 86%) 0.9606
+89m 52s (- 6m 25s) (70000 93%) 0.9084
+96m 12s (- 0m 0s) (75000 100%) 0.8534
+```
+
+### Visualization
+
+**Attention Visualization**
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis1.png)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/att_vis2.png)
+
+## Evaluation
+
+```
+> she is being blackmailed by him .
+= il exerce sur elle du chantage .
+< elle va beaucoup lui lui . <EOS>
+
+> you re very religious aren t you ?
+= vous etes tres religieuses n est ce pas ?
+< vous etes tres religieux n est ce pas ? <EOS>
+
+> he is on the team .
+= il fait partie de l equipe .
+< il est partie de la equipe . <EOS>
+
+> you re the leader .
+= c est vous la chef .
+< vous etes la chef chef . <EOS>
+
+> you are too young to travel alone .
+= vous etes trop jeunes pour voyager seuls .
+< vous etes trop jeune pour voyager seul . <EOS>
+
+> you aren t supposed to swim here .
+= tu n es pas cense nager ici .
+< vous n etes pas censees nager ici . <EOS>
+
+> he s no saint .
+= il n est pas un saint .
+< ce n est pas un saint . <EOS>
+
+> you re a woman now .
+= vous etes desormais une femme .
+< vous etes une femme maintenant . <EOS>
+
+> we re surprised .
+= nous sommes surprises .
+< nous sommes surpris . <EOS>
+
+> we re open tomorrow .
+= nous sommes ouverts demain .
+< nous sommes ouverts demain . <EOS>
+```
 
 ## Improvements
 
