@@ -144,6 +144,140 @@ During inference, since there is usually no ground truth available, the model wi
 < nous sommes ouverts demain . <EOS>
 ```
 
+## Comparison with French-English Translator without Glove Embedding
+
+<table>
+<tr>
+<th></th>
+<th>
+French-English without Glove
+</th>
+<th>
+English-French with Glove 300
+</th>
+<th>
+English-French with Glove 50
+</th>
+</tr>
+
+<tr>
+
+<td>
+<pre>
+Hidden Dimension Size
+</pre>
+</td>
+
+<td>
+<pre>
+256
+</pre>
+</td>
+
+<td>
+<pre>
+300
+</pre>
+</td>
+
+<td>
+<pre>
+50
+</pre>
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+<pre>
+Training Logs
+</pre>
+</td>
+
+<td>
+<pre>
+1m 37s (- 22m 51s) (5000 6%) 2.8698
+3m 10s (- 20m 41s) (10000 13%) 2.2560
+4m 44s (- 18m 59s) (15000 20%) 1.9696
+6m 18s (- 17m 21s) (20000 26%) 1.7177
+7m 52s (- 15m 45s) (25000 33%) 1.4991
+9m 26s (- 14m 10s) (30000 40%) 1.3369
+11m 0s (- 12m 34s) (35000 46%) 1.2026
+12m 34s (- 11m 0s) (40000 53%) 1.0701
+14m 9s (- 9m 26s) (45000 60%) 0.9826
+15m 43s (- 7m 51s) (50000 66%) 0.9066
+17m 18s (- 6m 17s) (55000 73%) 0.7882
+18m 53s (- 4m 43s) (60000 80%) 0.7265
+20m 28s (- 3m 9s) (65000 86%) 0.6788
+22m 3s (- 1m 34s) (70000 93%) 0.5923
+23m 38s (- 0m 0s) (75000 100%) 0.5424
+</pre>
+</td>
+
+<td>
+<pre>
+6m 27s (- 90m 21s) (5000 6%) 3.4356
+12m 50s (- 83m 30s) (10000 13%) 2.7440
+19m 16s (- 77m 6s) (15000 20%) 2.3890
+25m 41s (- 70m 38s) (20000 26%) 2.1120
+32m 6s (- 64m 13s) (25000 33%) 1.8726
+38m 32s (- 57m 48s) (30000 40%) 1.6580
+44m 57s (- 51m 22s) (35000 46%) 1.5425
+51m 24s (- 44m 59s) (40000 53%) 1.3826
+57m 49s (- 38m 33s) (45000 60%) 1.2583
+64m 14s (- 32m 7s) (50000 66%) 1.1682
+70m 39s (- 25m 41s) (55000 73%) 1.0912
+77m 4s (- 19m 16s) (60000 80%) 1.0004
+83m 29s (- 12m 50s) (65000 86%) 0.9606
+89m 52s (- 6m 25s) (70000 93%) 0.9084
+96m 12s (- 0m 0s) (75000 100%) 0.8534
+</pre>
+</td>
+
+<td>
+<pre>
+1m 57s (- 27m 22s) (5000 6%) 3.7662
+3m 52s (- 25m 10s) (10000 13%) 3.2280
+5m 47s (- 23m 10s) (15000 20%) 3.0531
+7m 43s (- 21m 15s) (20000 26%) 2.9402
+9m 39s (- 19m 18s) (25000 33%) 2.8136
+11m 34s (- 17m 22s) (30000 40%) 2.7815
+13m 29s (- 15m 25s) (35000 46%) 2.6704
+15m 25s (- 13m 30s) (40000 53%) 2.5774
+17m 20s (- 11m 33s) (45000 60%) 2.5704
+19m 16s (- 9m 38s) (50000 66%) 2.5075
+21m 11s (- 7m 42s) (55000 73%) 2.4544
+23m 5s (- 5m 46s) (60000 80%) 2.4038
+25m 1s (- 3m 50s) (65000 86%) 2.3848
+26m 56s (- 1m 55s) (70000 93%) 2.3420
+28m 50s (- 0m 0s) (75000 100%) 2.3033
+</pre>
+</td>
+
+</tr>
+
+<tr>
+<td><pre>
+Observations
+</pre></td>
+
+<td><pre>Better loss when comared with 50 and 300 glove dimension pretrained networks. Need to compare with 200 glove embedding to compare performance.</pre></td>
+
+<td><pre>
+When compared with no embeddings, we see higher loss because hidden dimension was increased from 256 to 300. Although the encoder has to learn less because of pretrained weights, the decoder's learning task is increased due to additional hidden dimension. It has to capture more context.
+</pre></td>
+
+<td><pre>
+When compared with no embeddings, we see higher loss because hidden dimension was decreased from 256 to 50. Lesser context is captured by the embedding dimension and so lesser information is captured by the model. Thus, the model's is nt capable to learn the translation.
+</pre></td>
+</tr>
+
+</table>
+
+
+
 ## Improvements
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/imp1.PNG)
