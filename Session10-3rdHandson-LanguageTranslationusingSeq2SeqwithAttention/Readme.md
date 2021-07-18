@@ -14,10 +14,25 @@
 # Solution
 ---
 
-<video width="100%" height="auto" loop="" autoplay="" controls="">
-   <source src="https://raw.githubusercontent.com/garima-mahato/END2/main/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention/assets/attention_process1.mp4" type="video/mp4">
-   Your browser does not support the video tag.
-</video>
+**Task: English to Frensch Translation**
+
+
+### Training Logs
+
+```
+6m 23s (- 89m 29s) (5000 6%) 3.4010
+12m 43s (- 82m 41s) (10000 13%) 2.7494
+19m 3s (- 76m 13s) (15000 20%) 2.3543
+25m 24s (- 69m 51s) (20000 26%) 2.0915
+31m 46s (- 63m 32s) (25000 33%) 1.8712
+38m 7s (- 57m 10s) (30000 40%) 1.6453
+44m 29s (- 50m 50s) (35000 46%) 1.5507
+50m 55s (- 44m 33s) (40000 53%) 1.3937
+57m 19s (- 38m 12s) (45000 60%) 1.2722
+63m 44s (- 31m 52s) (50000 66%) 1.1702
+```
+
+
 
 ## Teacher Forcing
 
