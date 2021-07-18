@@ -1,3 +1,5 @@
+
+
 # Assignment
 ---
 
@@ -16,6 +18,7 @@
 
 **Task: English to Frensch Translation**
 
+https://user-images.githubusercontent.com/52399940/126055121-8056ae8e-ee73-4698-a0e5-b9fb93c1313c.mp4
 
 ### Training Logs
 
