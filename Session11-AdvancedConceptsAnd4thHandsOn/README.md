@@ -22,9 +22,9 @@
 
 # Solution
 
-[Link to GitHub Code]()
+[Link to GitHub Code](https://github.com/garima-mahato/END2/blob/main/Session11-AdvancedConceptsAnd4thHandsOn/END2_Session11_4thHandsOn.ipynb)
 
-[Link to Colab Code]()
+[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session11-AdvancedConceptsAnd4thHandsOn/END2_Session11_4thHandsOn.ipynb)
 
 **Input Sentence: 'elles sont tres grosses .'**
 
