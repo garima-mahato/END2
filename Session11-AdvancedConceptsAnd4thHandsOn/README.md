@@ -1,15 +1,11 @@
-# Sacred Path to NLP Enlightenment
+# Assignment
 
-## 1) [Background and Basics](https://garima-mahato.github.io/END2/Session1-Background_And_Very_Basics)
-
-## 2) [Backpropagation, Emeddings and Language Models](https://garima-mahato.github.io/END2/Session2-BackProp_Embeddings_and_Language_Models)
-
-## 3) [Pytorch](https://garima-mahato.github.io/END2/Session3-PyTorch)
-
-## 4) [RNN are dead and their Renewed Relevance](https://garima-mahato.github.io/END2/Session4-RNN_are_dead%2C_and_their_renewed_relevance)
-
-## 5) [First Hands-on](https://garima-mahato.github.io/END2/Session5-FirstHands-on)
-
-## 6) [GRU, Sequence to Sequence and Introduction to Attention Mechanism](https://garima-mahato.github.io/END2/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism)
-
-## 7) [Second Hands-on](https://garima-mahato.github.io/END2/Session7-SecondHands-on)
+Follow the similar strategy as we did in our baby-steps-code (Links to an external site.), but replace GRU with LSTM. In your code you must:
+Perform 1 full feed forward step for the encoder manually
+Perform 1 full feed forward step for the decoder manually.
+You can use any of the 3 attention mechanisms that we discussed. 
+Explain your steps in the readme file and
+Submit the assignment asking for these things:
+Link to the readme file that must explain Encoder/Decoder Feed-forward manual steps and the attention mechanism that you have used - 500 pts
+Copy-paste (don't redirect to github), the Encoder Feed Forward steps for 2 words - 250 pts
+Copy-paste (don't redirect to github), the Decoder Feed Forward steps for 2 words - 250 pts
