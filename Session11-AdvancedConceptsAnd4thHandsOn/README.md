@@ -91,18 +91,20 @@ Calculating the attention weights is done with another feed-forward layer ``attn
 #### 1) Feed Forward Step 1
 
 Tensor corresponding to 1st word/token('elles') [351] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
 ```
 embedded_input = embedding(input_tensor[i].view(-1, 1))
 ```
 
-Output of embedding layer is passed into LSTM Layer
+Output of embedding layer is passed into LSTM Layer.
 
 ```
 output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
 encoder_outputs[i] += output[0,0]
 ```
 
-View of Encoder Ouput
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the first token or word in 256 dimensions is being represented.
+
 ```
 plot_matrix(encoder_outputs)
 ```
@@ -111,21 +113,116 @@ plot_matrix(encoder_outputs)
 
 #### 2) Feed Forward Step 2
 
+Tensor corresponding to 2nd word/token('sont') [349] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
+```
+embedded_input = embedding(input_tensor[i].view(-1, 1))
+```
+
+Output of embedding layer is passed into LSTM Layer.
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the second token or word in 256 dimensions is being represented.
+
+```
+plot_matrix(encoder_outputs)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc2.PNG)
 
 #### 3) Feed Forward Step 3
+
+Tensor corresponding to 3rd word/token('tres') [121] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
+```
+embedded_input = embedding(input_tensor[i].view(-1, 1))
+```
+
+Output of embedding layer is passed into LSTM Layer.
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the third token or word in 256 dimensions is being represented.
+
+```
+plot_matrix(encoder_outputs)
+```
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc3.PNG)
 
 #### 4) Feed Forward Step 4
 
+Tensor corresponding to 4th word/token('grosses') [1062] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
+```
+embedded_input = embedding(input_tensor[i].view(-1, 1))
+```
+
+Output of embedding layer is passed into LSTM Layer.
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the fourth token or word in 256 dimensions is being represented.
+
+```
+plot_matrix(encoder_outputs)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc4.PNG)
 
 #### 5) Feed Forward Step 5
 
+Tensor corresponding to 5th word/token('.') [5] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
+```
+embedded_input = embedding(input_tensor[i].view(-1, 1))
+```
+
+Output of embedding layer is passed into LSTM Layer.
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the fifth token or word in 256 dimensions is being represented.
+
+```
+plot_matrix(encoder_outputs)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc5.PNG)
 
 #### 6) Feed Forward Step 6
+
+Tensor corresponding to 6th word/token('<EOS>') [1] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+
+```
+embedded_input = embedding(input_tensor[i].view(-1, 1))
+```
+
+Output of embedding layer is passed into LSTM Layer.
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the sixth token or word in 256 dimensions is being represented.
+
+```
+plot_matrix(encoder_outputs)
+```
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc6.PNG)
 
