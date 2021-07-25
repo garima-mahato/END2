@@ -126,7 +126,7 @@ output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hid
 encoder_outputs[i] += output[0,0]
 ```
 
-Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the second token or word in 256 dimensions is being represented.
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the 1st to 2nd tokens or words in 256 dimensions is being represented.
 
 ```
 plot_matrix(encoder_outputs)
@@ -149,7 +149,7 @@ output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hid
 encoder_outputs[i] += output[0,0]
 ```
 
-Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the third token or word in 256 dimensions is being represented.
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the 1st to 3rd tokens or words in 256 dimensions is being represented.
 
 ```
 plot_matrix(encoder_outputs)
@@ -172,7 +172,7 @@ output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hid
 encoder_outputs[i] += output[0,0]
 ```
 
-Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the fourth token or word in 256 dimensions is being represented.
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the 1st to 4th tokens or words in 256 dimensions is being represented.
 
 ```
 plot_matrix(encoder_outputs)
@@ -195,7 +195,7 @@ output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hid
 encoder_outputs[i] += output[0,0]
 ```
 
-Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the fifth token or word in 256 dimensions is being represented.
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the 1st to 5th tokens or words in 256 dimensions is being represented.
 
 ```
 plot_matrix(encoder_outputs)
@@ -218,7 +218,7 @@ output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hid
 encoder_outputs[i] += output[0,0]
 ```
 
-Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the sixth token or word in 256 dimensions is being represented.
+Below is the view of Encoder Output. The encoding learnt by LSTM with respect to the 1st to 6th tokens or words in 256 dimensions is being represented.
 
 ```
 plot_matrix(encoder_outputs)
@@ -231,25 +231,424 @@ plot_matrix(encoder_outputs)
 
 #### 1) Feed Forward Step 1
 
+After all words in the input sentence have been encoded, then the task of decoding, or more specifically translating, is started. 
+
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [221] is passed else \<SOS\> is passed as decoder's input.
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 1st English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec1.PNG)
 
 #### 2) Feed Forward Step 2
+
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [224] is passed else previously predicted word is passed as decoder's input.
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 2nd English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec2.PNG)
 
 #### 3) Feed Forward Step 3
 
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [303] is passed else previously predicted word is passed as decoder's input.
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 3rd English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec3.PNG)
 
 #### 4) Feed Forward Step 4
+
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [131] is passed else previously predicted word is passed as decoder's input.
+
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 4th English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec4.PNG)
 
 #### 5) Feed Forward Step 5
 
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [4] is passed else previously predicted word is passed as decoder's input.
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 5th English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec5.PNG)
 
 #### 6) Feed Forward Step 6
+
+Teacher forcing is used with 50% probability. If 1 comes, then teacher forcing is used and first token from target tensor [1] is passed else previously predicted word is passed as decoder's input.
+
+```
+teacher_forcing = 0.5
+decoder_input = torch.tensor([[target_indices[i] if np.random.binomial(1,teacher_forcing) == 1 else SOS_token]], device=device)
+```
+
+The last hidden and cell states of the encoder is sent to the decoder.Since the last hidden and cell state are by product of encoder afer having seen the entire sentence, they capture the essence and context of the input sentence.
+
+```
+decoder_hidden = encoder_hidden
+decoder_cell_state = encoder_cell_state
+```
+
+The numerical token of *decoder_input* must be converted into embedding of 256 dimension for standard contextual represention.
+
+```
+embedded = embedding(decoder_input)
+```
+
+The embeddings of *decoder_input* and encoder's last hidden state are appended vertically. This appended/concatenated tensor is passed through an FC Layer which maps the 512 dimensions to 10 dimensions where 10 represents the max length of sentences in the dataset to calculate the weights/importance that should be given to each token of input while predicting a particular word. The weeights are then passed through softmax layer to normalize the weights. These weights reperesnt the attention that must be given to each token for a particular output. So, these weights are multiplied with the encoder's outputs. The result is a tensor representing the encoder tokens which must be focused on to generate English token.
+```
+attn_weight_layer = nn.Linear(256 * 2, 10).to(device)
+input_to_lstm_layer = nn.Linear(256 * 2, 256).to(device)
+
+attn_weights = attn_weight_layer(torch.cat((embedded[0], decoder_hidden[0]), 1))
+attn_weights = F.softmax(attn_weights, dim = 1)
+attn_applied = torch.bmm(attn_weights.unsqueeze(0), encoder_outputs.unsqueeze(0))
+```
+
+The embedded input and focused state are concatenated and passed through FC layer to convert into 256 dimensions and then batch is added.
+
+```
+input_to_lstm = input_to_lstm_layer(torch.cat((embedded[0], attn_applied[0]), 1))
+input_to_lstm = input_to_lstm.unsqueeze(0)
+```
+
+The above transformed input is then passed into LSTM layer for learning translation to English.
+
+```
+output, (decoder_hidden, decoder_cell_state) = dec_lstm(input_to_lstm, (decoder_hidden, decoder_cell_state))
+```
+
+The output of LSTM layer is passed to ReLU and Softmax for selecting one of the words from the English vocabulary formed from the dataset.
+
+```
+output = F.relu(output)
+output = F.softmax(output_word_layer(output[0]), dim = 1)
+```
+
+The word having the maximum softmax value is chosen as the predicted word.
+
+```
+top_value, top_index = output.data.topk(1)
+pred_op.append(top_index.item())
+```
+
+Below is the attention map for predicting 6th English word.
+
+```
+decoder_attentions[i] = attn_weights.data.detach().cpu()
+print(f"Target: {target_sentence.split(' ')[i]} \nPredicted: {output_lang.index2word[top_index.item()]}")#, attn_weights)
+print("Attention Map")
+showAttention(input_sentence, [output_lang.index2word[pred] for pred in pred_op], decoder_attentions)
+```
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec6.PNG)
 
