@@ -90,6 +90,19 @@ Calculating the attention weights is done with another feed-forward layer ``attn
 
 #### 1) Feed Forward Step 1
 
+Tensor corresponding to 1st word/token('elles') [351] is taken from input tensor. It is then reshaped to add batch dimension and passed to the embedding layer.
+```embedded_input = embedding(input_tensor[i].view(-1, 1))```
+
+Output of embedding layer is passed into LSTM Layer
+
+```
+output, (encoder_hidden, encoder_cell_state) = lstm(embedded_input, (encoder_hidden, encoder_cell_state))
+encoder_outputs[i] += output[0,0]
+```
+
+# View of Encoder Ouput
+plot_matrix(encoder_outputs)
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc1.PNG)
 
 #### 2) Feed Forward Step 2
