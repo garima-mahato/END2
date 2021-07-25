@@ -51,11 +51,35 @@
 
 *Target Tensor: [221, 124, 303, 131, 4, 1]*
 
-#### Step 3: Add batch dimension into tensors of both sentences.
+#### Step 4: Add batch dimension into tensors of both sentences.
 
 *Input Tensor: [[351, 349, 121, 1062, 5, 1]]*
 
 *Target Tensor: [[221, 124, 303, 131, 4, 1]]*
 
 
-## Encoder Feed-Forward
+## Architecture
+
+### Encoder Architecture
+
+The encoder of a seq2seq network is a RNN that outputs some value for every word from the input sentence. For every input word the encoder outputs a vector and a hidden state, and uses the hidden state for the next input word.
+
+![image](https://pytorch.org/tutorials/_images/encoder-network.png)
+
+
+### Attention Decoder Architecture
+
+If only the context vector is passed between the encoder and decoder, that single vector carries the burden of encoding the entire sentence.
+
+Attention allows the decoder network to "focus" on a different part of the encoder's outputs for every step of the decoder's own outputs. First we calculate a set of *attention weights*. These will be multiplied by the encoder output vectors to create a weighted combination. The result (called ``attn_applied`` in the code) should contain information about that specific part of the input sequence, and thus help the decoder choose the right output words.
+
+![image](https://i.imgur.com/1152PYf.png)
+
+Calculating the attention weights is done with another feed-forward layer ``attn``, using the decoder's input and hidden state as inputs. Because there are sentences of all sizes in the training data, to actually create and train this layer we have to choose a maximum sentence length (input length, for encoder outputs) that it can apply to. Sentences of the maximum length will use all the attention weights, while shorter sentences will only use the first few.
+
+![image](https://pytorch.org/tutorials/_images/attention-decoder-network.png)
+
+
+## Encoder Feed-Forward Steps
+
+Fo
