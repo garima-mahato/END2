@@ -82,4 +82,37 @@ Calculating the attention weights is done with another feed-forward layer ``attn
 
 ## Encoder Feed-Forward Steps
 
-Fo
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc1.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc2.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc3.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc4.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc5.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc6.PNG)
+
+
+## Decoder Feed-Forward Steps
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec1.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec2.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec3.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec4.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec5.PNG)
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec6.PNG)
+
+
+
+**Input Sentence: 'elles sont tres grosses . \<EOS\>'**
+
+**Target Sentence: 'they are very big . \<EOS\>'**
+
+**Predicted Sentence: 'french impossible foolish foolish foolish handkerchiefs'**
