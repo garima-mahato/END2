@@ -66,6 +66,12 @@ The encoder of a seq2seq network is a RNN that outputs some value for every word
 
 ![image](https://pytorch.org/tutorials/_images/encoder-network.png)
 
+Encoder consist of:
+
+> 1) **Embedding Layer** to convert each token in target tensor to embedding.
+
+> 2) **LSTM Layer** to analyse the embedding and generate encodings to be utilised by the decoder for translation.
+
 
 ### Attention Decoder Architecture
 
@@ -82,30 +88,54 @@ Calculating the attention weights is done with another feed-forward layer ``attn
 
 ## Encoder Feed-Forward Steps
 
+#### 1) Feed Forward Step 1
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc1.PNG)
+
+#### 2) Feed Forward Step 2
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc2.PNG)
 
+#### 3) Feed Forward Step 3
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc3.PNG)
+
+#### 4) Feed Forward Step 4
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc4.PNG)
 
+#### 5) Feed Forward Step 5
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc5.PNG)
+
+#### 6) Feed Forward Step 6
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/enc6.PNG)
 
 
 ## Decoder Feed-Forward Steps
 
+#### 1) Feed Forward Step 1
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec1.PNG)
+
+#### 2) Feed Forward Step 2
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec2.PNG)
 
+#### 3) Feed Forward Step 3
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec3.PNG)
+
+#### 4) Feed Forward Step 4
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec4.PNG)
 
+#### 5) Feed Forward Step 5
+
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec5.PNG)
+
+#### 6) Feed Forward Step 6
 
 ![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session11-AdvancedConceptsAnd4thHandsOn/assets/dec6.PNG)
 
