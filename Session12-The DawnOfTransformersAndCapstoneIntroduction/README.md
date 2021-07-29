@@ -1,15 +1,36 @@
-# Sacred Path to NLP Enlightenment
+# Assignment
+---
 
-## 1) [Background and Basics](https://garima-mahato.github.io/END2/Session1-Background_And_Very_Basics)
+Take the code above, and make it work with any dataset. Submit the GitHub repo's ReadMe file, where I can see answers to these questions:
 
-## 2) [Backpropagation, Emeddings and Language Models](https://garima-mahato.github.io/END2/Session2-BackProp_Embeddings_and_Language_Models)
+1) what dataset you have used
 
-## 3) [Pytorch](https://garima-mahato.github.io/END2/Session3-PyTorch)
+2) what problem have you solved (fill in the blank, translation, text generation, etc)
 
-## 4) [RNN are dead and their Renewed Relevance](https://garima-mahato.github.io/END2/Session4-RNN_are_dead%2C_and_their_renewed_relevance)
+3) the output of your training for 10 epochs
 
-## 5) [First Hands-on](https://garima-mahato.github.io/END2/Session5-FirstHands-on)
+# Solution
+---
 
-## 6) [GRU, Sequence to Sequence and Introduction to Attention Mechanism](https://garima-mahato.github.io/END2/Session6-GRUs%2CSeq2SeqandIntroductiontoAttentionMechanism)
+[Link to GitHub Code]()
 
-## 7) [Second Hands-on](https://garima-mahato.github.io/END2/Session7-SecondHands-on)
+[Link to Colab Code]()
+
+## 1) Used Multik30 dataset
+
+## 2) Problem Solved: Translation from French to English.
+
+## 3) Training Logs
+
+```
+Epoch: 1, Train loss: 0.687, Val loss: 0.135, Epoch time = 79.095s
+Epoch: 2, Train loss: 0.035, Val loss: 0.111, Epoch time = 78.633s
+Epoch: 3, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.535s
+Epoch: 4, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.522s
+Epoch: 5, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.362s
+Epoch: 6, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.350s
+Epoch: 7, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.404s
+Epoch: 8, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.544s
+Epoch: 9, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.600s
+Epoch: 10, Train loss: 0.000, Val loss: 0.111, Epoch time = 78.505s
+```
