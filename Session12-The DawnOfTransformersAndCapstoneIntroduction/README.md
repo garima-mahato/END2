@@ -12,9 +12,9 @@ Take the code above, and make it work with any dataset. Submit the GitHub repo's
 # Solution
 ---
 
-[Link to GitHub Code]()
+[Link to GitHub Code](https://github.com/garima-mahato/END2/blob/main/Session12-The%20DawnOfTransformersAndCapstoneIntroduction/END2_Session12_TheDawnOfTransformers.ipynb)
 
-[Link to Colab Code]()
+[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session12-The%20DawnOfTransformersAndCapstoneIntroduction/END2_Session12_TheDawnOfTransformers.ipynb)
 
 ## 1) Used Multik30 dataset
 
