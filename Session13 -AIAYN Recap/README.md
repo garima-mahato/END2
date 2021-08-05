@@ -13,9 +13,9 @@ Your assignment is to remove all the legacy stuff from this and submit:
 # Solution
 ---
 
-[Link to GitHub Code](https://github.com/garima-mahato/END2/blob/main/Session12-The%20DawnOfTransformersAndCapstoneIntroduction/END2_Session12_TheDawnOfTransformers.ipynb)
+[Link to GitHub Code](https://github.com/garima-mahato/END2/blob/main/Session13%20-AIAYN%20Recap/END2_Session13_AIAYN.ipynb)
 
-[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session12-The%20DawnOfTransformersAndCapstoneIntroduction/END2_Session12_TheDawnOfTransformers.ipynb)
+[Link to Colab Code](https://githubtocolab.com/garima-mahato/END2/blob/main/Session13%20-AIAYN%20Recap/END2_Session13_AIAYN.ipynb)
 
 ## 1) Training Logs
 
@@ -110,3 +110,59 @@ Target English Sentence: A man in a vest is sitting in a chair and holding magaz
 Predicted English Sentence: A man in a vest sits on a stool and holds up magazines .
 ```
 
+
+## French to English Translation with Attention Maps
+
+****************************************
+French to English Translations:-
+****************************************
+
+
+1) French Sentence: Ein Mann mit einem orangefarbenen Hut, der etwas anstarrt.
+
+Target English Sentence: A man in an orange hat starring at something.
+
+Predicted English Sentence: A man in an orange hat , with a handheld mane brush .
+Attention Map:
+
+![]()
+
+
+2) French Sentence: Ein Boston Terrier läuft über saftig-grünes Gras vor einem weißen Zaun.
+
+Target English Sentence: A Boston Terrier is running on lush green grass in front of a white fence.
+
+Predicted English Sentence: A Boston Boston jockey walks over grass in front of a white fence .
+Attention Map: 
+
+![]()
+
+
+
+3) French Sentence: Ein Mädchen in einem Karateanzug bricht einen Stock mit einem Tritt.
+
+Target English Sentence: A girl in karate uniform breaking a stick with a front kick.
+
+Predicted English Sentence: A girl in a karate uniform is learning a stick with a zebra mate , and roll .
+Attention Map: 
+
+![]()
+
+4) French Sentence: Fünf Leute in Winterjacken und mit Helmen stehen im Schnee mit Schneemobilen im Hintergrund.
+
+Target English Sentence: Five people wearing winter jackets and helmets stand in the snow, with snowmobiles in the background.
+
+Predicted English Sentence: Five people in winter jackets and helmets stand in the snow with bamboo poles in the background .
+Attention Map: 
+
+![]()
+
+
+
+
+5) French Sentence: Leute Reparieren das Dach eines Hauses.
+
+Target English Sentence: People are fixing the roof of a house.
+
+Predicted English Sentence: People trail out the roof of a house .
+Attention Map: 
