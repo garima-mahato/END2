@@ -125,7 +125,7 @@ Target English Sentence: A man in an orange hat starring at something.
 Predicted English Sentence: A man in an orange hat , with a handheld mane brush .
 Attention Map:
 
-![]()
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session13%20-AIAYN%20Recap/assets/p1.png)
 
 
 2) French Sentence: Ein Boston Terrier läuft über saftig-grünes Gras vor einem weißen Zaun.
@@ -135,7 +135,7 @@ Target English Sentence: A Boston Terrier is running on lush green grass in fron
 Predicted English Sentence: A Boston Boston jockey walks over grass in front of a white fence .
 Attention Map: 
 
-![]()
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session13%20-AIAYN%20Recap/assets/p2.png)
 
 
 
@@ -146,7 +146,9 @@ Target English Sentence: A girl in karate uniform breaking a stick with a front 
 Predicted English Sentence: A girl in a karate uniform is learning a stick with a zebra mate , and roll .
 Attention Map: 
 
-![]()
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session13%20-AIAYN%20Recap/assets/p3.png)
+
+
 
 4) French Sentence: Fünf Leute in Winterjacken und mit Helmen stehen im Schnee mit Schneemobilen im Hintergrund.
 
@@ -155,7 +157,7 @@ Target English Sentence: Five people wearing winter jackets and helmets stand in
 Predicted English Sentence: Five people in winter jackets and helmets stand in the snow with bamboo poles in the background .
 Attention Map: 
 
-![]()
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session13%20-AIAYN%20Recap/assets/p4.png)
 
 
 
@@ -166,3 +168,5 @@ Target English Sentence: People are fixing the roof of a house.
 
 Predicted English Sentence: People trail out the roof of a house .
 Attention Map: 
+
+![](https://raw.githubusercontent.com/garima-mahato/END2/main/Session13%20-AIAYN%20Recap/assets/p5.png)
