@@ -19,3 +19,16 @@
 
 ## Solution
 
+### TASK 1
+
+#### BERT
+
+#### Training
+
+![]()
+
+#### Sample Predictions
+
+```
+
+```
