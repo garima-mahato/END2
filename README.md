@@ -2,7 +2,7 @@
 
 ## 1) [Background and Basics](https://garima-mahato.github.io/END2/Session1-Background_And_Very_Basics)
 
-## 2) [Backpropagation, Emeddings and Language Models](https://garima-mahato.github.io/END2/Session2-BackProp_Embeddings_and_Language_Models)
+## 2) [Backpropagation, Embeddings and Language Models](https://garima-mahato.github.io/END2/Session2-BackProp_Embeddings_and_Language_Models)
 
 ## 3) [Pytorch](https://garima-mahato.github.io/END2/Session3-PyTorch)
 
