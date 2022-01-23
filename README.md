@@ -24,6 +24,6 @@
 
 ## 12) [The Dawn of Transformers and Capstone Introduction](https://garima-mahato.github.io/END2/Session12-TheDawnOfTransformersAndCapstoneIntroduction)
 
-## 13) [AIAYN Recap](https://garima-mahato.github.io/END2/Session13-AIAYN Recap)
+## 13) [AIAYN Recap](https://garima-mahato.github.io/END2/Session13-AIAYNRecap)
 
 ## 14) [BERT and BART](https://garima-mahato.github.io/END2/Session14-BERTandBART)
