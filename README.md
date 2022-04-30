@@ -16,7 +16,7 @@
 
 ## 8) [TorchText & Advanced Concepts](https://garima-mahato.github.io/END2/Session8-TorchText&AdvancedConcepts)
 
-## 9) [Learning Ratesand Evaluation Metrics - Part1](https://garima-mahato.github.io/END2/Session9-LearningRatesandEvaluationMetricsPart1)
+## 9) [Learning Rates and Evaluation Metrics - Part1](https://garima-mahato.github.io/END2/Session9-LearningRatesandEvaluationMetricsPart1)
 
 ## 10) [3rdHandson - Language Translation using Seq2Seq with Attention](https://garima-mahato.github.io/END2/Session10-3rdHandson-LanguageTranslationusingSeq2SeqwithAttention)
 
